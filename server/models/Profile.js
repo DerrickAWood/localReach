@@ -3,11 +3,15 @@ const Schema = mongoose.Schema;
 
 const Profile = new Schema(
   {
-    subs: [{ type: String, unique: true }],
-    email: { type: String, lowercase: true, unique: true },
     name: { type: String, required: true },
-    picture: { type: String }
+    email: { type: String, lowercase: true, unique: true },
+    picture: { type: String },
+    subs: [{ type: String, unique: true }],
     // NOTE If you wish to add additional public properties for profiles do so here
+    location: {type: String},
+    payment: {type: String},
+    default: {type: Number, default: 5},
+    banned: {type: Boolean, default: false}
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
