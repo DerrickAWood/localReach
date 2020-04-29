@@ -17,12 +17,20 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    profile: {}
+    profile: {},
+    activeOrg:{},
+    orgs:[]
   },
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
-    }
+    },
+    setActiveOrg(state, org) {
+      state.activeOrg = org
+    },
+    setOrgs(state, orgs) {
+      state.orgs = orgs
+    },
   },
   actions: {
     setBearer({}, bearer) {
@@ -38,6 +46,26 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    async getOrgs({ commit, dispatch }) {
+      try {
+        let res = await api.get('organizations');
+        //commit("setProfile", res.data);
+        commit('setOrgs', res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addOrg({ commit, dispatch }, orgData) {
+      try {
+        let res = await api.post("organizations/",orgData );
+        this.dispatch("getOrgs")
+        console.log("addOrg",res.data)
+        commit('setActiveOrg', res.data);
+        //this.dispatch("getOrg", res.data)
+      } catch (error) {
+        console.error(error);
+      }
+    }, 
   }
 });
