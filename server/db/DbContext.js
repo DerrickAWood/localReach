@@ -4,6 +4,8 @@ import ValueSchema from "../models/Value";
 // import NoteSchema from "../models/Note";
 import ProfileSchema from "../models/Profile";
 import DonationSchema from "../models/Donation"
+import OrganizationSchema from "../models/Organization"
+
 
 class DbContext {
   Values = mongoose.model("Value", ValueSchema);
@@ -11,6 +13,7 @@ class DbContext {
   // Notes = mongoose.model("Value", NoteSchema);
   Profile = mongoose.model("Profile", ProfileSchema);
   Donations = mongoose.model("Donation", DonationSchema);
+  Organizations = mongoose.model("Organization", OrganizationSchema);
 }
 
 export const dbContext = new DbContext();
