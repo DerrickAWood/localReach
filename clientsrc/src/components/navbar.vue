@@ -16,7 +16,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" :class="{ active: $route.name == 'Home' }">
+        <li
+          class="nav-item"
+          :class="{ active: $route.name == 'Welcome' }"
+        >
+          <router-link class="nav-link" :to="{ name: 'Welcome' }"
+            >Welcome</router-link
+          >
+        </li>
+        <li class="nav-item" v-if="$auth.isAuthenticated" :class="{ active: $route.name == 'Home' }">
           <router-link :to="{ name: 'Home' }" class="nav-link"
             >Home</router-link
           >
