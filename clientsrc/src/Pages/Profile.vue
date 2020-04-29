@@ -3,6 +3,77 @@
     <h1>Welcome {{ profile.name }}</h1>
     <img class="rounded" :src="profile.picture" alt />
     <p>{{ profile.email }}</p>
+
+    <form @submit.prevent="changeProfile()">
+      <div class="form-group">
+        <label for="title">Name</label>
+        <input
+          type="text"
+          name="title"
+          id
+          class="form-control"
+          placeholder="enter name..."
+          aria-describedby="helpId"
+          v-model="profile.name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="body">Location</label>
+        <input
+          type="text"
+          name="body"
+          id
+          class="form-control"
+          placeholder="enter Location..."
+          aria-describedby="helpId"
+          v-model="profile.location"
+        />
+      </div>
+      <div class="form-group">
+        <label for="body">payment</label>
+        <input
+          type="text"
+          name="body"
+          id
+          class="form-control"
+          placeholder="enter payment..."
+          aria-describedby="helpId"
+          v-model="profile.payment"
+        />
+      </div>
+      <div class="form-group">
+        <label for="body">picture</label>
+        <input
+          type="text"
+          name="body"
+          id
+          class="form-control"
+          placeholder="enter picture..."
+          aria-describedby="helpId"
+          v-model="profile.picture"
+          required
+        />
+      </div>
+            <div class="form-group">
+        <label for="body">default</label>
+        <input
+          type="text"
+          name="body"
+          id
+          class="form-control"
+          placeholder="enter default donation amount..."
+          aria-describedby="helpId"
+          v-model="profile.default"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Save</button>
+    </form>
+    <button class="btn btn-process" @click="closeBug()">
+      <h5 class="text-danger">Close</h5>
+    </button>
+
     <!-- Button trigger modal -->
     <button
       type="button"
@@ -44,7 +115,7 @@
                 type="text"
                 placeholder="add picture..."
                 v-model="newOrg.picture"
-                required
+                
               />
               <h5 class="m-1 pr-2 pl-3 tskName">address:</h5>
               <input
@@ -69,12 +140,17 @@
                 placeholder="add email..."
                 v-model="newOrg.organizationEmail"
                 required
-              />              
+              />
             </form>...
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="addOrg">Save changes</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              @click="addOrg"
+            >Save changes</button>
           </div>
         </div>
       </div>
@@ -88,7 +164,7 @@
 import Org from "../components/Org.vue";
 export default {
   name: "Profile",
-    data() {
+  data() {
     return {
       newOrg: {}
     };
@@ -99,13 +175,17 @@ export default {
     }
   },
   //
-    methods: {
+  methods: {
     addOrg() {
-      console.log("addOrg", this.newOrg)
+      console.log("addOrg", this.newOrg);
       this.$store.dispatch("addOrg", this.newOrg);
       this.newOrg = {};
+    },
+    changeProfile(){
+      console.log("changeProfile", this.profile);
+      this.$store.dispatch("changeProfile", this.profile); 
     }
-  }, 
+  },
   components: { Org }
 };
 </script>

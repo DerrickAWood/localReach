@@ -67,5 +67,20 @@ export default new Vuex.Store({
         console.error(error);
       }
     }, 
+    //changeProfile
+    async changeProfile({ commit, dispatch }, profileData) {
+      //console.log("changeProfile", profileData)
+      try {
+        let res = await api.put("profile/" + profileData.id ,profileData );
+        console.log("changeProfile", res.data)
+        //this.dispatch("getProfile")
+        //console.log("addOrg",res.data)
+        //commit('setActiveOrg', res.data);
+        //this.dispatch("getOrg", res.data)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
   }
 });
