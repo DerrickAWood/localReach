@@ -5,12 +5,13 @@ import Home from "../Pages/Home.vue";
 // @ts-ignore
 import Welcome from "../Pages/Welcome.vue";
 import Profile from "../Pages/Profile.vue";
-import { authGuard } from "@bcwdev/auth0-vue";
+import {
+  authGuard
+} from "@bcwdev/auth0-vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Welcome",
     component: Welcome,
@@ -19,6 +20,7 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home,
+    beforeEnter: authGuard,
   },
   {
     path: "/profile",
