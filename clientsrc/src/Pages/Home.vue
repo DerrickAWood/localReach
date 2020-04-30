@@ -1,8 +1,11 @@
 <template>
   <div class="home">
     <div class="row text-center">
-      <div class="col-12">
-        <img class="img-fluid w-100" :src="orgData.picture" />
+      <div class="col-11">
+        <img class="img-fluid w-80" :src="orgData.picture" />
+      </div>
+      <div class="col-1">
+        <button class="btn btn-sm btn-primary" @click="next()">NEXT</button>
       </div>
     </div>
     <div class="row text-center">
@@ -15,10 +18,13 @@
         <button class="btn btn-block btn-primary" @click="donate()">Donate</button>
       </div>
     </div>
+    <hr>
+    <org-details></org-details>
   </div>
 </template>
 
 <script>
+import OrgDetails from "../components/OrgDetails"
 export default {
   name: "home",
   computed: {
@@ -34,6 +40,9 @@ export default {
     this.$store.dispatch("getOrgs");
   },
   methods: {
+    next(){
+      this.$store.dispatch("next")
+    },
     donate(donationType) {
       let amount = 0;
 
@@ -50,6 +59,6 @@ export default {
       }
     }
   },
-  components: {}
+  components: { OrgDetails }
 };
 </script>

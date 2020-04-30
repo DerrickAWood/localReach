@@ -13,6 +13,10 @@
       <p>banned: {{orgData.banned}}</p>
       <p>active: {{orgData.active}}</p>
       <p>validated: {{orgData.validated}}</p>
+      <p>website: {{orgData.website}}</p>
+      <p>links: {{orgData.links}}</p>
+      <p>EIN: {{orgData.EIN}}</p>
+
           <!-- Button trigger modal -->
     <button
       type="button"

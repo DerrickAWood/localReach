@@ -16,7 +16,10 @@ const Organization = new Schema(
     active: {type: Boolean, default: false},
     validated: {type: Boolean, default: false},
     creatorEmail: {type: String, lowercase: true, required: true},
-    organizationEmail: {type: String, lowercase: true, unique: true}
+    organizationEmail: {type: String, lowercase: true, unique: true},
+    website: {type: String},
+    links: {type: String},
+    EIN: {type: String} // make required later
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

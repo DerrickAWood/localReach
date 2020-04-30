@@ -70,9 +70,6 @@
       </div>
       <button type="submit" class="btn btn-success">Save</button>
     </form>
-    <button class="btn btn-process" @click="closeBug()">
-      <h5 class="text-danger">Close</h5>
-    </button>
 
     <!-- Button trigger modal -->
     <button
@@ -141,6 +138,44 @@
                 v-model="newOrg.organizationEmail"
                 required
               />
+
+              <div class="form-group">
+        <label for="body">Website</label>
+        <input
+          type="text"
+          name="body"
+          id
+          class="form-control"
+          placeholder="enter website link..."
+          aria-describedby="helpId"
+          v-model="newOrg.website"
+        />
+</div>
+        <div class="form-group">
+        <label for="body">links</label>
+        <input
+          type="text"
+          name="body"
+          id
+          class="form-control"
+          placeholder="enter social media links..."
+          aria-describedby="helpId"
+          v-model="newOrg.links"
+        />
+</div>
+        <div class="form-group">
+        <label for="body">EIN</label>
+        <input
+          type="text"
+          name="body"
+          id
+          class="form-control"
+          placeholder="enter EIN..."
+          aria-describedby="helpId"
+          v-model="newOrg.EIN"
+          required
+        />
+        </div>
             </form>...
           </div>
           <div class="modal-footer">

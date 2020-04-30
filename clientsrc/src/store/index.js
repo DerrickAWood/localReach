@@ -20,7 +20,8 @@ export default new Vuex.Store({
     profile: {},
     activeOrg: {},
     orgs: [],
-    donations: []
+    donations: [],
+    orgIndex: Number
   },
   mutations: {
     setProfile(state, profile) {
@@ -35,6 +36,11 @@ export default new Vuex.Store({
     },
     setDonations(state, donations) {
       state.donations = donations
+    },
+    setNextOrg(state, num){
+      let currentOrgIndex = state.orgIndex
+      currentOrgIndex = currentOrgIndex + 1 
+      state.orgIndex+= 
     }
   },
   actions: {
@@ -120,6 +126,10 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
+    },
+    
+    next(){
+      this.commit('orgIndex' )
     }
 
   }
