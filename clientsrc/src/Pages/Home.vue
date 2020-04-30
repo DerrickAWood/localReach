@@ -78,3 +78,10 @@ export default {
   components: { OrgDetails }
 };
 </script>
+
+<style scoped>
+img {
+  max-width: 85%;
+  min-width: 75%;
+}
+</style>

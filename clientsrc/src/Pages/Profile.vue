@@ -55,7 +55,7 @@
           required
         />
       </div>
-            <div class="form-group">
+      <div class="form-group">
         <label for="body">default</label>
         <input
           type="text"
@@ -112,7 +112,6 @@
                 type="text"
                 placeholder="add picture..."
                 v-model="newOrg.picture"
-                
               />
               <h5 class="m-1 pr-2 pl-3 tskName">address:</h5>
               <input
@@ -140,42 +139,42 @@
               />
 
               <div class="form-group">
-        <label for="body">Website</label>
-        <input
-          type="text"
-          name="body"
-          id
-          class="form-control"
-          placeholder="enter website link..."
-          aria-describedby="helpId"
-          v-model="newOrg.website"
-        />
-</div>
-        <div class="form-group">
-        <label for="body">links</label>
-        <input
-          type="text"
-          name="body"
-          id
-          class="form-control"
-          placeholder="enter social media links..."
-          aria-describedby="helpId"
-          v-model="newOrg.links"
-        />
-</div>
-        <div class="form-group">
-        <label for="body">EIN</label>
-        <input
-          type="text"
-          name="body"
-          id
-          class="form-control"
-          placeholder="enter EIN..."
-          aria-describedby="helpId"
-          v-model="newOrg.EIN"
-          required
-        />
-        </div>
+                <label for="body">Website</label>
+                <input
+                  type="text"
+                  name="body"
+                  id
+                  class="form-control"
+                  placeholder="enter website link..."
+                  aria-describedby="helpId"
+                  v-model="newOrg.website"
+                />
+              </div>
+              <div class="form-group">
+                <label for="body">links</label>
+                <input
+                  type="text"
+                  name="body"
+                  id
+                  class="form-control"
+                  placeholder="enter social media links..."
+                  aria-describedby="helpId"
+                  v-model="newOrg.links"
+                />
+              </div>
+              <div class="form-group">
+                <label for="body">EIN</label>
+                <input
+                  type="text"
+                  name="body"
+                  id
+                  class="form-control"
+                  placeholder="enter EIN..."
+                  aria-describedby="helpId"
+                  v-model="newOrg.EIN"
+                  required
+                />
+              </div>
             </form>...
           </div>
           <div class="modal-footer">
@@ -190,13 +189,20 @@
         </div>
       </div>
     </div>
-    <org></org>
+    <!-- <org></org> -->
+    <DonationDetails
+      class=""
+      v-for="donationItem in donations"
+      :donationData="donationItem"
+      :key="donationItem._id"
+    ></DonationDetails>
   </div>
 </template>
 
 <script>
 //inport Org from ".."
-import Org from "../components/Org.vue";
+import DonationDetails from "../components/DonationDetails.vue";
+//import Org from "../components/Org.vue";
 export default {
   name: "Profile",
   data() {
@@ -207,6 +213,9 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile;
+    },
+    donations() {
+      return this.$store.state.donations;
     }
   },
   //
@@ -216,12 +225,12 @@ export default {
       this.$store.dispatch("addOrg", this.newOrg);
       this.newOrg = {};
     },
-    changeProfile(){
+    changeProfile() {
       console.log("changeProfile", this.profile);
-      this.$store.dispatch("changeProfile", this.profile); 
+      this.$store.dispatch("changeProfile", this.profile);
     }
   },
-  components: { Org }
+  components: { DonationDetails }
 };
 </script>
 
