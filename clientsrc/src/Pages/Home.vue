@@ -34,18 +34,34 @@ export default {
     profile() {
       console.log("from profilex", this.$store.state.profile);
       return this.$store.state.profile;
+    },
+    currentIndex(){
+      return this.$store.state.orgIndex
+    },
+    numOrgs(){
+      return this.$store.state.orgs.length
+    },
+    Orgs(){
+      return this.$store.state.orgs
     }
   },
   mounted() {
+    //debugger
     this.$store.dispatch("getOrgs");
+    //this.$store.dispatch("next", 0);
   },
   methods: {
     next(){
-      this.$store.dispatch("next")
+      let currentOrg = 0
+      currentOrg = this.currentIndex
+      currentOrg+= 1
+      if (currentOrg == this.Orgs.length){
+        currentOrg = 0
+      }
+      this.$store.dispatch("next", currentOrg)
     },
     donate(donationType) {
       let amount = 0;
-
       amount = prompt("How much do you want to donate?", this.profile.default);
 
       if (amount) {

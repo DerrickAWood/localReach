@@ -21,7 +21,7 @@ export default new Vuex.Store({
     activeOrg: {},
     orgs: [],
     donations: [],
-    orgIndex: Number
+    orgIndex: 0
   },
   mutations: {
     setProfile(state, profile) {
@@ -37,10 +37,10 @@ export default new Vuex.Store({
     setDonations(state, donations) {
       state.donations = donations
     },
-    setNextOrg(state, num){
-      let currentOrgIndex = state.orgIndex
-      currentOrgIndex = currentOrgIndex + 1 
-      state.orgIndex+= 
+    setNextOrg(state, orgIndex){
+      //debugger
+      state.orgIndex = orgIndex
+      state.activeOrg= state.orgs[orgIndex]
     }
   },
   actions: {
@@ -128,8 +128,19 @@ export default new Vuex.Store({
       }
     },
     
-    next(){
-      this.commit('orgIndex' )
+    async next({
+      commit,
+      dispatch
+    }, orgIndex){
+      try{
+        //debugger
+        console.log("next", orgIndex)
+        await this.commit('setNextOrg', orgIndex )
+      } catch (error) {
+        console.error(error)
+      }
+      //let newOrg = this.state.orgs[orgIndex]
+      //this.commit('setActiveOrg', )
     }
 
   }
