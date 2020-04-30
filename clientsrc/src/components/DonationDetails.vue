@@ -4,7 +4,7 @@
       <div class="col-2">
         <h1>{{donationData.amount}}</h1>
       </div>
-      <div class="col-3">
+      <div class="col-2">
         <h2>{{donationData.createdAt}}</h2>
       </div>
       <div class="col-2">
