@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <div class="row">
-      <div class="col-9">
-        <img class="img-fluid" :src="orgData.picture" />
+    <div class="row text-center">
+      <div class="col-12">
+        <img class="img-fluid w-100" :src="orgData.picture" />
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
+    <div class="row text-center">
+      <div class="col-12">
         <h1>{{orgData.name}}</h1>
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
+    <div class="row text-center">
+      <div class="col-6 offset-3">
         <button class="btn btn-block btn-primary" @click="donate()">Donate</button>
       </div>
     </div>
