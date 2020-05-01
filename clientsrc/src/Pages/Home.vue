@@ -70,6 +70,7 @@ export default {
       let postList = this.$store.state.orgs;
       return postList.filter(post => {
         return post.name.toLowerCase().includes(this.search.toLowerCase());
+        //return post.address.toLowerCase().includes(this.search.toLowerCase());
       });
     }
   },
