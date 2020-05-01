@@ -10,7 +10,8 @@ class DonationsService {
   async getAll(userEmail) {
     return await dbContext.Donations.find({
       creatorEmail: userEmail
-    }).populate("creator", "name picture")
+    }).populate("organization", "name")
+    //.populate("creator", "name picture")
   }
 
   async getById(id, userEmail) {

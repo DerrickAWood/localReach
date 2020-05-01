@@ -29,4 +29,12 @@ const Donation = new Schema({
   }
 });
 
+Donation.virtual("organization",
+  {
+    localField: "organizationId",
+    ref: "Organization",
+    foreignField: "_id",
+    justOne: true
+  })
+
 export default Donation;

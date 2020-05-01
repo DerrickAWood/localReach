@@ -218,7 +218,9 @@ export default {
       return this.$store.state.donations;
     }
   },
-  //
+  mounted() {
+    this.$store.dispatch("getDonations");
+  },
   methods: {
     addOrg() {
       console.log("addOrg", this.newOrg);
