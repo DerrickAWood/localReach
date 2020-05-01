@@ -15,11 +15,6 @@ let api = Axios.create({
   withCredentials: true
 });
 
-let apiOrg = Axios.create({
-  baseURL: "https://projects.propublica.org/nonprofits/api/v2/organizations/",
-  timeout: 3000,
-  withCredentials: true
-});
 
 export default new Vuex.Store({
   state: {
@@ -79,12 +74,13 @@ export default new Vuex.Store({
       }
     },
 
+    // ANCHOR start here
     async getApiOrg({
       commit,
       dispatch
     },ein ) {
       try {
-        let res = await apiOrg.get(ein + ".json");
+        let res = await api.get("/apiOrg");
         //commit("setProfile", res.data);
         console.log(res)
         // commit('setOrgs', res.data);
