@@ -2,9 +2,12 @@
   <div class="about text-center">
     <h1>Welcome {{ profile.name }}</h1>
     <img class="rounded" :src="profile.picture" alt />
-    <p>{{ profile.email }}</p>
+    <h2>email: {{ profile.email }}</h2>
+    <h2>Location: {{ profile.location }}</h2>
+    <h2>Payment Info: {{ profile.payment }}</h2>
+    <h2>Default Payment Amount: {{ profile.default }}</h2>
 
-    <form @submit.prevent="changeProfile()">
+    <!-- <form @submit.prevent="changeProfile()">
       <div class="form-group">
         <label for="title">Name</label>
         <input
@@ -69,7 +72,7 @@
         />
       </div>
       <button type="submit" class="btn btn-success">Save</button>
-    </form>
+    </form> -->
 
     <!-- Button trigger modal -->
     <button
@@ -77,7 +80,7 @@
       class="btn btn-primary"
       data-toggle="modal"
       data-target="#exampleModal"
-    >Organization</button>
+    >Edit</button>
 
     <!-- Modal -->
     <div
@@ -91,90 +94,52 @@
       <div class="modal-dialog text-center" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Organization</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form class="mb-3" @submit.prevent="addOrg">
+            <form class="mb-3" @submit.prevent="changeProfile">
               <h5 class="m-1 pr-2 pl-3 tskName">Name:</h5>
               <input
                 class="pr-4 pl-2 inputTask"
                 type="text"
-                placeholder="add name of organization..."
-                v-model="newOrg.name"
+                placeholder="add name..."
+                v-model="profile.name"
                 required
               />
-              <h5 class="m-1 pr-2 pl-3 tskName">picture:</h5>
+              <h5 class="m-1 pr-2 pl-3 tskName">Location:</h5>
+              <input
+                class="pr-4 pl-2 inputTask"
+                type="text"
+                placeholder="enter location..."
+                v-model="profile.location"
+              />
+              <h5 class="m-1 pr-2 pl-3 tskName">Payment Information:</h5>
+              <input
+                class="pr-4 pl-2 inputTask"
+                type="text"
+                placeholder="add payment information..."
+                v-model="profile.payment"
+                required
+              />
+              <h5 class="m-1 pr-2 pl-3 tskName">Picture:</h5>
               <input
                 class="pr-4 pl-2 inputTask"
                 type="text"
                 placeholder="add picture..."
-                v-model="newOrg.picture"
-              />
-              <h5 class="m-1 pr-2 pl-3 tskName">address:</h5>
-              <input
-                class="pr-4 pl-2 inputTask"
-                type="text"
-                placeholder="add address..."
-                v-model="newOrg.address"
+                v-model="profile.picture"
                 required
               />
-              <h5 class="m-1 pr-2 pl-3 tskName">payment:</h5>
-              <input
-                class="pr-4 pl-2 inputTask"
-                type="text"
-                placeholder="add payment..."
-                v-model="newOrg.payment"
-                required
-              />
-              <h5 class="m-1 pr-2 pl-3 tskName">email:</h5>
+              <h5 class="m-1 pr-2 pl-3 tskName">Default Donation Amount:</h5>
               <input
                 class="pr-4 pl-2 inputTask"
                 type="text"
                 placeholder="add email..."
-                v-model="newOrg.organizationEmail"
+                v-model="profile.default"
                 required
               />
-
-              <div class="form-group">
-                <label for="body">Website</label>
-                <input
-                  type="text"
-                  name="body"
-                  id
-                  class="form-control"
-                  placeholder="enter website link..."
-                  aria-describedby="helpId"
-                  v-model="newOrg.website"
-                />
-              </div>
-              <div class="form-group">
-                <label for="body">links</label>
-                <input
-                  type="text"
-                  name="body"
-                  id
-                  class="form-control"
-                  placeholder="enter social media links..."
-                  aria-describedby="helpId"
-                  v-model="newOrg.links"
-                />
-              </div>
-              <div class="form-group">
-                <label for="body">EIN</label>
-                <input
-                  type="text"
-                  name="body"
-                  id
-                  class="form-control"
-                  placeholder="enter EIN..."
-                  aria-describedby="helpId"
-                  v-model="newOrg.EIN"
-                  required
-                />
-              </div>
             </form>...
           </div>
           <div class="modal-footer">
@@ -183,7 +148,7 @@
               type="button"
               class="btn btn-primary"
               data-dismiss="modal"
-              @click="addOrg"
+              @click="changeProfile"
             >Save changes</button>
           </div>
         </div>
