@@ -24,7 +24,7 @@ export class OrganizationsController extends BaseController {
 
   async getAll(req, res, next) {
     try {
-      let data = await organizationsService.getAll(req.userInfo.email)
+      let data = await organizationsService.getAll()
       return res.send(data)
     } catch (err) {
       next(err)

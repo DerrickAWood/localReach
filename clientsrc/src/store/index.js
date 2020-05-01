@@ -37,10 +37,10 @@ export default new Vuex.Store({
     setDonations(state, donations) {
       state.donations = donations
     },
-    setNextOrg(state, orgIndex){
+    setNextOrg(state, orgIndex) {
       //debugger
       state.orgIndex = orgIndex
-      state.activeOrg= state.orgs[orgIndex]
+      state.activeOrg = state.orgs[orgIndex]
     }
   },
   actions: {
@@ -127,15 +127,15 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    
+
     async next({
       commit,
       dispatch
-    }, orgIndex){
-      try{
+    }, orgIndex) {
+      try {
         //debugger
         console.log("next", orgIndex)
-        await this.commit('setNextOrg', orgIndex )
+        await this.commit('setNextOrg', orgIndex)
       } catch (error) {
         console.error(error)
       }

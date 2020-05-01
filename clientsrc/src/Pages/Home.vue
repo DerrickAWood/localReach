@@ -1,11 +1,27 @@
 <template>
   <div class="home">
     <div class="row text-center">
+      <div class="col-8 justify-content-start">
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search Organizations"
+            aria-label="Search"
+            v-model="search"
+          />
+          <button
+            class="btn btn-outline-success my-2 my-sm-0 mr-2"
+            @click="searchOrgs()"
+            type="button"
+          >Search</button>
+        </form>
+      </div>
+      <div class="col-1 d-flex justify-content-end">
+        <button class="btn btn-sm btn-primary" @click="next()">NEXT</button>
+      </div>
       <div class="col-11">
         <img class="img-fluid w-80" :src="orgData.picture" />
-      </div>
-      <div class="col-1">
-        <button class="btn btn-sm btn-primary" @click="next()">NEXT</button>
       </div>
     </div>
     <div class="row text-center">
@@ -18,15 +34,21 @@
         <button class="btn btn-block btn-primary" @click="donate()">Donate</button>
       </div>
     </div>
-    <hr>
+    <hr />
     <org-details></org-details>
   </div>
 </template>
 
 <script>
-import OrgDetails from "../components/OrgDetails"
+import OrgDetails from "../components/OrgDetails";
 export default {
   name: "home",
+
+  data() {
+    return {
+      search: ""
+    };
+  },
   computed: {
     orgData() {
       return this.$store.state.activeOrg;
@@ -35,14 +57,20 @@ export default {
       console.log("from profilex", this.$store.state.profile);
       return this.$store.state.profile;
     },
-    currentIndex(){
-      return this.$store.state.orgIndex
+    currentIndex() {
+      return this.$store.state.orgIndex;
     },
-    numOrgs(){
-      return this.$store.state.orgs.length
+    numOrgs() {
+      return this.$store.state.orgs.length;
     },
-    Orgs(){
-      return this.$store.state.orgs
+    Orgs() {
+      return this.$store.state.orgs;
+    },
+    filteredList() {
+      let postList = this.$store.state.orgs;
+      return postList.filter(post => {
+        return post.name.toLowerCase().includes(this.search.toLowerCase());
+      });
     }
   },
   mounted() {
@@ -51,14 +79,14 @@ export default {
     //this.$store.dispatch("next", 0);
   },
   methods: {
-    next(){
-      let currentOrg = 0
-      currentOrg = this.currentIndex
-      currentOrg+= 1
-      if (currentOrg == this.Orgs.length){
-        currentOrg = 0
+    next() {
+      let currentOrg = 0;
+      currentOrg = this.currentIndex;
+      currentOrg += 1;
+      if (currentOrg == this.Orgs.length) {
+        currentOrg = 0;
       }
-      this.$store.dispatch("next", currentOrg)
+      this.$store.dispatch("next", currentOrg);
     },
     donate(donationType) {
       let amount = 0;
@@ -73,6 +101,11 @@ export default {
         console.log("from donateDefault", donation);
         this.$store.dispatch("donateDefault", donation);
       }
+    },
+    async searchOrgs() {
+      console.log("searchOrgs", this.filteredList);
+      console.log("searchOrgs", this.filteredList[0]);
+      this.$store.commit("setActiveOrg", this.filteredList[0]);
     }
   },
   components: { OrgDetails }
