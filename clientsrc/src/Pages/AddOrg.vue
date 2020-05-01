@@ -1,10 +1,10 @@
 <template>
   <div class="about text-center">
-    <h1>Welcome {{ profile.name }}</h1>
-    <img class="rounded" :src="profile.picture" alt />
+    <h1>Add Organization</h1>
+    <!-- <img class="rounded" :src="profile.picture" alt /> -->
     <p>{{ profile.email }}</p>
 
-    <form @submit.prevent="changeProfile()">
+    <!-- <form @submit.prevent="changeProfile()">
       <div class="form-group">
         <label for="title">Name</label>
         <input
@@ -69,7 +69,7 @@
         />
       </div>
       <button type="submit" class="btn btn-success">Save</button>
-    </form>
+    </form> -->
 
     <!-- Button trigger modal -->
     <button
@@ -190,22 +190,22 @@
       </div>
     </div>
     <!-- <org></org> -->
-    <h1>Donation Total: {{ donationTotal }}</h1>
-    <DonationDetails
+    <!-- <h1>Donation Total: {{ donationTotal }}</h1> -->
+    <!-- <DonationDetails
       class=""
       v-for="donationItem in donations"
       :donationData="donationItem"
       :key="donationItem._id"
-    ></DonationDetails>
+    ></DonationDetails> -->
   </div>
 </template>
 
 <script>
 //inport Org from ".."
-import DonationDetails from "../components/DonationDetails.vue";
+//import DonationDetails from "../components/DonationDetails.vue";
 //import Org from "../components/Org.vue";
 export default {
-  name: "Profile",
+  name: "AddOrg",
   data() {
     return {
       newOrg: {}
@@ -215,21 +215,9 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
-    donations() {
-      return this.$store.state.donations;
-    },
-    donationTotal() {
-      let i = 0
-      let donations = this.$store.state.donations
-      let total = 0
-      for (i = 0; i < donations.length ; i++){
-        total+= donations[i].amount
-      }
-      return total;
-    }
   },
   mounted() {
-    this.$store.dispatch("getDonations");
+  //  this.$store.dispatch("getDonations");
   },
   methods: {
     addOrg() {
@@ -237,12 +225,8 @@ export default {
       this.$store.dispatch("addOrg", this.newOrg);
       this.newOrg = {};
     },
-    changeProfile() {
-      console.log("changeProfile", this.profile);
-      this.$store.dispatch("changeProfile", this.profile);
-    }
   },
-  components: { DonationDetails }
+  //components: {  }
 };
 </script>
 

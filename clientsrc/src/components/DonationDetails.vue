@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid text-center">
+  <div class="container-fluid">
     <div class="row" >
       <div class="col-1">
         <h3>{{donationData.amount}}</h3>
@@ -8,9 +8,9 @@
         <h5>{{new Date(donationData.createdAt).toDateString()}}</h5>
         <!-- <h2>{{new Date(donationData.createdAt).toString()}}</h2> -->
       </div>
-      <div class="col-2">
-        <h5>{{donationData.organizationId}}</h5>
-        <p>{{donationData.organization.name}}</p>
+      <div class="col-6">
+        <!-- <h5>{{donationData.organizationId}}</h5> -->
+        <h5>{{donationData.organization.name}}</h5>
       </div>
     </div>
 

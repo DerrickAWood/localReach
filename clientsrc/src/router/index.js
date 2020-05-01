@@ -4,7 +4,10 @@ import VueRouter from "vue-router";
 import Home from "../Pages/Home.vue";
 // @ts-ignore
 import Welcome from "../Pages/Welcome.vue";
+// @ts-ignore
 import Profile from "../Pages/Profile.vue";
+// @ts-ignore
+import AddOrg from "../Pages/AddOrg.vue";
 import {
   authGuard
 } from "@bcwdev/auth0-vue";
@@ -26,6 +29,12 @@ const routes = [{
     path: "/profile",
     name: "Profile",
     component: Profile,
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/AddOrg",
+    name: "AddOrg",
+    component: AddOrg,
     beforeEnter: authGuard,
   },
 ];
