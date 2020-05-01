@@ -3,6 +3,7 @@
     <h1>Add Organization</h1>
     <!-- <img class="rounded" :src="profile.picture" alt /> -->
     <p>{{ profile.email }}</p>
+    <button @click="checkEin()">Check</button>
 
     <!-- <form @submit.prevent="changeProfile()">
       <div class="form-group">
@@ -225,6 +226,9 @@ export default {
       this.$store.dispatch("addOrg", this.newOrg);
       this.newOrg = {};
     },
+    checkEin(){
+      this.$store.dispatch("getApiOrg", "820299431")
+    }
   },
   //components: {  }
 };

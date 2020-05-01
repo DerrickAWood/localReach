@@ -13,7 +13,7 @@
           <button
             class="btn btn-outline-success my-2 my-sm-0 mr-2"
             @click="searchOrgs()"
-            type="button"
+            type="submit"
           >Search</button>
         </form>
       </div>
