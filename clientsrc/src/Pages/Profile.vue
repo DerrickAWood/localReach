@@ -1,11 +1,59 @@
 <template>
-  <div class="about text-center">
-    <h1>Welcome {{ profile.name }}</h1>
+  <div class="about container-fluid m-3 text-center">
+    <div class="row">
+    <div class="col-4">
+
+    <div class="card" style="width: 18rem;">
+  <img :src="profile.picture" class="card-img-top" alt="">
+  <div class="card-body">
+    <h5 class="card-title">Welcome, {{ profile.name }}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">email: {{ profile.email }}</li>
+    <li class="list-group-item">Location: {{ profile.location }}</li>
+    <li class="list-group-item">Payment Info: {{ profile.payment }}</li>
+    <li class="list-group-item">Default Payment Amount: {{ profile.default }}</li>
+  </ul>
+  <div class="card-body">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModal"
+    >Edit</button>
+  </div>
+</div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    Donation Total: {{ donationTotal }}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+</div>
+
+
+</div>
+
+
+
+
+    <!-- <h1>Welcome {{ profile.name }}</h1>
     <img class="rounded" :src="profile.picture" alt />
     <h2>email: {{ profile.email }}</h2>
     <h2>Location: {{ profile.location }}</h2>
     <h2>Payment Info: {{ profile.payment }}</h2>
-    <h2>Default Payment Amount: {{ profile.default }}</h2>
+    <h2>Default Payment Amount: {{ profile.default }}</h2> -->
+
+
+
+
+
+
 
     <!-- <form @submit.prevent="changeProfile()">
       <div class="form-group">
@@ -75,12 +123,12 @@
     </form> -->
 
     <!-- Button trigger modal -->
-    <button
+    <!-- <button
       type="button"
       class="btn btn-primary"
       data-toggle="modal"
       data-target="#exampleModal"
-    >Edit</button>
+    >Edit</button> -->
 
     <!-- Modal -->
     <div
@@ -154,6 +202,7 @@
         </div>
       </div>
     </div>
+    
     <!-- <org></org> -->
     <h1>Donation Total: {{ donationTotal }}</h1>
     <DonationDetails

@@ -1,7 +1,10 @@
 <template>
-  <div class="home">
-    <div class="row text-center">
-      <div class="col-8 justify-content-start">
+  <div class="home container-fluid">
+
+
+
+    <div class="row m-3">
+      <div class="col-6 ml-5">
         <form class="form-inline my-2 my-lg-0">
           <input
             class="form-control mr-sm-2"
@@ -11,25 +14,46 @@
             v-model="search"
           />
           <button
-            class="btn btn-outline-success my-2 my-sm-0 mr-2"
+            class="btn btn-primary my-2 my-sm-0 mr-2"
             @click="searchOrgs()"
             type="submit"
           >Search</button>
         </form>
       </div>
-      <div class="col-1 d-flex justify-content-end">
-        <button class="btn btn-sm btn-primary" @click="next()">NEXT</button>
-      </div>
-      <div class="col-11">
+        <div>
+          <button class="btn btn-sm btn-primary" @click="next()">NEXT</button>
+        </div>
+    </div>
+
+
+    <div class="card bg-dark text-white">
+  <img :src="orgData.picture" class="card-img" alt="">
+  <div class="card-img-overlay text-center text-dark">
+    <h1 class="card-title">{{orgData.name}}</h1>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="row">
+
+      <div class="col-12 text-center">
         <img class="img-fluid w-80" :src="orgData.picture" />
       </div>
-    </div>
+
+  </div>
+
     <div class="row text-center">
       <div class="col-12">
         <h1>{{orgData.name}}</h1>
       </div>
-    </div>
-    <div class="row text-center">
+    </div>  -->
+
+
+    <div class="row text-center m-3">
       <div class="col-6 offset-3">
         <button class="btn btn-block btn-primary" @click="donate()">Donate</button>
       </div>
