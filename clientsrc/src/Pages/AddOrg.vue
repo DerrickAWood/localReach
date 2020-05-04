@@ -3,7 +3,6 @@
     <h1>Add Organization</h1>
     <!-- <img class="rounded" :src="profile.picture" alt /> -->
     <p>{{ profile.email }}</p>
-    <button @click="checkEin()">Check</button>
 
     <!-- <form @submit.prevent="changeProfile()">
       <div class="form-group">
@@ -99,13 +98,31 @@
           </div>
           <div class="modal-body">
             <form class="mb-3" @submit.prevent="addOrg">
+              <div class="form-group">
+                <label for="body">EIN</label>
+                <input
+                  type="text"
+                  name="body"
+                  id
+                  class="form-control"
+                  placeholder="enter EIN..."
+                  aria-describedby="helpId"
+                  v-model="newOrg.EIN"
+                  required
+                />
+                <button @click="checkEin()">Check EIN</button>
+              </div>
+
+              <div v-show="newOrg.name != orgApiData.name">
+
               <h5 class="m-1 pr-2 pl-3 tskName">Name:</h5>
-              <input
+              <input 
                 class="pr-4 pl-2 inputTask"
                 type="text"
                 placeholder="add name of organization..."
-                v-model="newOrg.name"
+                v-model="orgApiData.name"
                 required
+                disabled
               />
               <h5 class="m-1 pr-2 pl-3 tskName">picture:</h5>
               <input
@@ -119,8 +136,9 @@
                 class="pr-4 pl-2 inputTask"
                 type="text"
                 placeholder="add address..."
-                v-model="newOrg.address"
+                v-model="orgApiData.address"
                 required
+                disabled
               />
               <h5 class="m-1 pr-2 pl-3 tskName">payment:</h5>
               <input
@@ -163,18 +181,7 @@
                   v-model="newOrg.links"
                 />
               </div>
-              <div class="form-group">
-                <label for="body">EIN</label>
-                <input
-                  type="text"
-                  name="body"
-                  id
-                  class="form-control"
-                  placeholder="enter EIN..."
-                  aria-describedby="helpId"
-                  v-model="newOrg.EIN"
-                  required
-                />
+              
               </div>
             </form>...
           </div>
@@ -216,6 +223,9 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
+    orgApiData(){
+      return this.$store.state.orgApiData
+    }
   },
   mounted() {
   //  this.$store.dispatch("getDonations");
@@ -223,11 +233,14 @@ export default {
   methods: {
     addOrg() {
       console.log("addOrg", this.newOrg);
+      this.newOrg.name = this.orgApiData.name 
+      this.newOrg.address = this.orgApiData.address
       this.$store.dispatch("addOrg", this.newOrg);
       this.newOrg = {};
     },
     checkEin(){
-      this.$store.dispatch("getApiOrg", "820299431")
+      // let ein = prompt("What is your ein?")
+       this.$store.dispatch("getApiOrg", this.newOrg.EIN)
     }
   },
   //components: {  }

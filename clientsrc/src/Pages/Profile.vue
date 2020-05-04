@@ -184,7 +184,7 @@
               <input
                 class="pr-4 pl-2 inputTask"
                 type="text"
-                placeholder="add email..."
+                placeholder="add default amount..."
                 v-model="profile.default"
                 required
               />

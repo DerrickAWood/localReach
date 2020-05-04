@@ -22,7 +22,8 @@ export default new Vuex.Store({
     activeOrg: {},
     orgs: [],
     donations: [],
-    orgIndex: 0
+    orgIndex: 0,
+    orgApiData: {}
   },
   mutations: {
     setProfile(state, profile) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
       //debugger
       state.orgIndex = orgIndex
       state.activeOrg = state.orgs[orgIndex]
+    },
+    setOrgApi(state, orgApiData){
+      state.orgApiData = orgApiData
     }
   },
   actions: {
@@ -80,9 +84,9 @@ export default new Vuex.Store({
       dispatch
     },ein ) {
       try {
-        let res = await api.get("/apiOrg");
-        //commit("setProfile", res.data);
-        console.log(res)
+        let res = await api.get("/apiOrg/" + ein);
+        commit("setOrgApi", res.data.organization);
+        console.log(res.data.organization)
         // commit('setOrgs', res.data);
       } catch (error) {
         console.error(error);

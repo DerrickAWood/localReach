@@ -12,13 +12,13 @@ export class ApiOrgsController extends BaseController{
     this.router
       // .use(auth0provider.getAuthorizedUserInfo)
       // .get('', this.getAll)
-      .get('', this.getById)
+      .get('/:id', this.getById)
       // .get('/:id/task', this.getTaskByListId)
   }
 
   async getById( req,res,next){
     try {
-      const {data: result}= await apiOrg.get("v2/organizations/820299431.json")
+      const {data: result}= await apiOrg.get("v2/organizations/" + req.params.id + ".json")
       return res.send(result)
     } catch (error) {
       next(error)

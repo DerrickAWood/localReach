@@ -139,7 +139,7 @@ export default {
 
 <style scoped>
 img {
-  max-width: 85%;
-  min-width: 75%;
+  max-height: 85%;
+  min-height: 75%;
 }
 </style>
