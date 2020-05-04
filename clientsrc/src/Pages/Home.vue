@@ -13,6 +13,13 @@
             aria-label="Search"
             v-model="search"
           />
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search Locations.."
+            aria-label="Search"
+            v-model="searchLocations"
+          />
           <button
             class="btn btn-primary my-2 my-sm-0 mr-2"
             @click="searchOrgs()"
@@ -70,7 +77,8 @@ export default {
 
   data() {
     return {
-      search: ""
+      search: "",
+      searchLocations: ""
     };
   },
   computed: {
@@ -87,13 +95,26 @@ export default {
     numOrgs() {
       return this.$store.state.orgs.length;
     },
-    Orgs() {
+    orgs() {
       return this.$store.state.orgs;
     },
     filteredList() {
+      console.log(this.orgs)
       let postList = this.$store.state.orgs;
-      return postList.filter(post => {
-        return post.name.toLowerCase().includes(this.search.toLowerCase());
+      list1 = []
+      if(!this.search){
+        list1 = postList
+      } else{
+         list1 = postList.filter(post => {
+          return post.name.toLowerCase().includes(this.search.toLowerCase());
+          //return post.address.toLowerCase().includes(this.search.toLowerCase());
+        });
+      }
+        if(!this.searchLocations){
+          return list1
+        }
+        return list1.filter(post => { 
+        return post.address.toLowerCase().includes(this.searchLocations.toLowerCase());
         //return post.address.toLowerCase().includes(this.search.toLowerCase());
       });
     }
@@ -124,7 +145,7 @@ export default {
           organizationId: this.orgData.id
         };
         console.log("from donateDefault", donation);
-        this.$store.dispatch("donateDefault", donation);
+        this.$store.dispatch("donate", donation);
       }
     },
     async searchOrgs() {

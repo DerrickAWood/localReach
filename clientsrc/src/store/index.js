@@ -138,7 +138,7 @@ export default new Vuex.Store({
       }
     },
 
-    async donateDefault({
+    async donate({
       commit,
       dispatch
     }, donation) {
