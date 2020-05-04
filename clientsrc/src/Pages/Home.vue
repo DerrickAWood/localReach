@@ -9,16 +9,9 @@
           <input
             class="form-control mr-sm-2"
             type="search"
-            placeholder="Search Organizations"
+            placeholder="Organization or Location"
             aria-label="Search"
             v-model="search"
-          />
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search Locations.."
-            aria-label="Search"
-            v-model="searchLocations"
           />
           <button
             class="btn btn-primary my-2 my-sm-0 mr-2"
@@ -99,24 +92,22 @@ export default {
       return this.$store.state.orgs;
     },
     filteredList() {
-      console.log(this.orgs)
-      let postList = this.$store.state.orgs;
-      list1 = []
-      if(!this.search){
-        list1 = postList
-      } else{
-         list1 = postList.filter(post => {
-          return post.name.toLowerCase().includes(this.search.toLowerCase());
-          //return post.address.toLowerCase().includes(this.search.toLowerCase());
-        });
-      }
-        if(!this.searchLocations){
-          return list1
+      let out = []
+      let list = this.$store.state.orgs;
+
+      for (let i =0; i < list.length; i++){
+        let listItem = list[i]
+        // if (listItem.name.toLowerCase().includes(this.search.toLowerCase()) &&
+        //  listItem.address.toLowerCase().includes(this.searchLocations.toLowerCase()) ){
+        //    out.push(listItem)
+        // }
+        if (listItem.name.toLowerCase().includes(this.search.toLowerCase()) ||
+         listItem.address.toLowerCase().includes(this.search.toLowerCase()) ){
+           out.push(listItem)
         }
-        return list1.filter(post => { 
-        return post.address.toLowerCase().includes(this.searchLocations.toLowerCase());
-        //return post.address.toLowerCase().includes(this.search.toLowerCase());
-      });
+      }
+      return out
+
     }
   },
   mounted() {
@@ -129,7 +120,7 @@ export default {
       let currentOrg = 0;
       currentOrg = this.currentIndex;
       currentOrg += 1;
-      if (currentOrg == this.Orgs.length) {
+      if (currentOrg == this.orgs.length) {
         currentOrg = 0;
       }
       this.$store.dispatch("next", currentOrg);
