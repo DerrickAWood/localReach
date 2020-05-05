@@ -1,31 +1,31 @@
 <template>
   <div class="home container-fluid">
-    <div class="row m-3">
-      <div class="col-6 ml-5">
-        <form class="form-inline my-2 my-lg-0">
+    <div class="row justify-content-between">
+        <form class="form-inline my-2 my-lg-0 m-lg-2">
           <input
-            class="form-control mr-sm-2"
+            class="form-control mr-sm-2 col-6"
             type="search"
             placeholder="Organization or Location"
             aria-label="Search"
             v-model="search"
           />
           <button
-            class="btn btn-primary my-2 my-sm-0 mr-2"
+            class="btn btn-primary my-2 my-sm-0"
             @click="searchOrgs()"
             type="submit"
           >Search</button>
         </form>
-      </div>
       <div>
-        <button class="btn btn-sm btn-primary" @click="next()">NEXT</button>
+        <button class="btn btn-primary my-2 my-sm-0 mr-2 mt-3 mt-lg-2" @click="next()">NEXT</button>
+      </div>
+      <div class=" col-12 text-center">
+        <h1 class="card-title">{{orgData.name}}</h1>
       </div>
     </div>
 
     <div class="card bg-dark text-white">
       <img :src="orgData.picture" class="card-img" alt />
       <div class="card-img-overlay text-center text-dark">
-        <h1 class="card-title">{{orgData.name}}</h1>
       </div>
     </div>
 
@@ -127,6 +127,7 @@ export default {
           out.push(listItem);
         }
       }
+      this.$store.commit('setFilteredOrgs', out)
       return out;
     }
   },
@@ -145,7 +146,7 @@ export default {
       let currentOrg = 0;
       currentOrg = this.currentIndex;
       currentOrg += 1;
-      if (currentOrg == this.orgs.length) {
+      if (currentOrg == this.filteredList.length) {
         currentOrg = 0;
       }
       this.$store.dispatch("next", currentOrg);

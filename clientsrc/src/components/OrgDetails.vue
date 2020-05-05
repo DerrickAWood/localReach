@@ -1,9 +1,8 @@
 <template>
-  <div class="OrgDetails container-fluid m-3">
-    <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4">
-    <div class="card" style="width: 18rem;">
+  <div class="OrgDetails">
+    <div class="row text-center">
+      <div class="col-10 offset-1">
+    <div class="card" style="">
   <div class="card-header">
   <h5> About This Organization </h5>
   </div>

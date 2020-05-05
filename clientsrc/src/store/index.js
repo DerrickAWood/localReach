@@ -23,7 +23,8 @@ export default new Vuex.Store({
     orgs: [],
     donations: [],
     orgIndex: 0,
-    orgApiData: {}
+    orgApiData: {},
+    filteredOrgs: []
   },
   mutations: {
     setProfile(state, profile) {
@@ -42,10 +43,13 @@ export default new Vuex.Store({
     setNextOrg(state, orgIndex) {
       //debugger
       state.orgIndex = orgIndex
-      state.activeOrg = state.orgs[orgIndex]
+      state.activeOrg = state.filteredOrgs[orgIndex]
     },
     setOrgApi(state, orgApiData){
       state.orgApiData = orgApiData
+    },
+    setFilteredOrgs(state, filteredOrgs){
+      state.filteredOrgs = filteredOrgs
     }
   },
   actions: {
