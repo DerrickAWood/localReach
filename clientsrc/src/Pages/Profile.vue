@@ -1,8 +1,8 @@
 <template>
-  <div class="about container-fluid m-3 text-center">
+  <div class="about container-fluid text-center">
     <div class="row">
-      <div class="col-10 col-md-8 justify-content-center">
-        <div class="card text-center">
+      <div class="m-auto col-10 col-md-8 justify-content-center">
+        <div class="card text-center mt-3">
           <img :src="profile.picture" class="card-img-top mx-auto mt-3 d-block" alt />
           <div class="card-body">
             <h5 class="card-title">Welcome, {{ profile.name }}</h5>
@@ -23,22 +23,24 @@
           </div>
         </div>
       </div>
+    </div>  
 
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">Donation Total: {{ donationTotal }}</div>
-        <ul class="list-group list-group-flush">
-          <!-- <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li> -->
+      <div class="row mt-3">
+        <div class="m-auto col-10 col-md-8 justify-content-center">
+          <div class="card" style="">
+            <div class="card-header">Donation Total: {{ donationTotal }}</div>
+            <ul class="list-group list-group-flush">
               <DonationDetails
-      class
-      v-for="donationItem in donations"
-      :donationData="donationItem"
-      :key="donationItem._id"
-    ></DonationDetails>
-        </ul>
+                class
+                v-for="donationItem in donations"
+                :donationData="donationItem"
+                :key="donationItem._id"
+              ></DonationDetails>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+  
     <!-- Modal -->
     <div
       class="modal fade"
@@ -119,7 +121,7 @@
       v-for="donationItem in donations"
       :donationData="donationItem"
       :key="donationItem._id"
-    ></DonationDetails> -->
+    ></DonationDetails>-->
   </div>
 </template>
 
