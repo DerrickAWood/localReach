@@ -1,135 +1,44 @@
 <template>
   <div class="about container-fluid m-3 text-center">
     <div class="row">
-    <div class="col-4">
-
-    <div class="card" style="width: 18rem;">
-  <img :src="profile.picture" class="card-img-top" alt="">
-  <div class="card-body">
-    <h5 class="card-title">Welcome, {{ profile.name }}</h5>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">email: {{ profile.email }}</li>
-    <li class="list-group-item">Location: {{ profile.location }}</li>
-    <li class="list-group-item">Payment Info: {{ profile.payment }}</li>
-    <li class="list-group-item">Default Payment Amount: {{ profile.default }}</li>
-  </ul>
-  <div class="card-body">
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#exampleModal"
-    >Edit</button>
-  </div>
-</div>
-</div>
-
-<div class="card" style="width: 18rem;">
-  <div class="card-header">
-    Donation Total: {{ donationTotal }}
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
-</div>
-
-
-</div>
-
-
-
-
-    <!-- <h1>Welcome {{ profile.name }}</h1>
-    <img class="rounded" :src="profile.picture" alt />
-    <h2>email: {{ profile.email }}</h2>
-    <h2>Location: {{ profile.location }}</h2>
-    <h2>Payment Info: {{ profile.payment }}</h2>
-    <h2>Default Payment Amount: {{ profile.default }}</h2> -->
-
-
-
-
-
-
-
-    <!-- <form @submit.prevent="changeProfile()">
-      <div class="form-group">
-        <label for="title">Name</label>
-        <input
-          type="text"
-          name="title"
-          id
-          class="form-control"
-          placeholder="enter name..."
-          aria-describedby="helpId"
-          v-model="profile.name"
-          required
-        />
+      <div class="col-10 col-md-8 justify-content-center">
+        <div class="card text-center">
+          <img :src="profile.picture" class="card-img-top mx-auto mt-3 d-block" alt />
+          <div class="card-body">
+            <h5 class="card-title">Welcome, {{ profile.name }}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">email: {{ profile.email }}</li>
+            <li class="list-group-item">Location: {{ profile.location }}</li>
+            <li class="list-group-item">Payment Info: {{ profile.payment }}</li>
+            <li class="list-group-item">Default Payment Amount: {{ profile.default }}</li>
+          </ul>
+          <div class="card-body">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >Edit</button>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="body">Location</label>
-        <input
-          type="text"
-          name="body"
-          id
-          class="form-control"
-          placeholder="enter Location..."
-          aria-describedby="helpId"
-          v-model="profile.location"
-        />
-      </div>
-      <div class="form-group">
-        <label for="body">payment</label>
-        <input
-          type="text"
-          name="body"
-          id
-          class="form-control"
-          placeholder="enter payment..."
-          aria-describedby="helpId"
-          v-model="profile.payment"
-        />
-      </div>
-      <div class="form-group">
-        <label for="body">picture</label>
-        <input
-          type="text"
-          name="body"
-          id
-          class="form-control"
-          placeholder="enter picture..."
-          aria-describedby="helpId"
-          v-model="profile.picture"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="body">default</label>
-        <input
-          type="text"
-          name="body"
-          id
-          class="form-control"
-          placeholder="enter default donation amount..."
-          aria-describedby="helpId"
-          v-model="profile.default"
-          required
-        />
-      </div>
-      <button type="submit" class="btn btn-success">Save</button>
-    </form> -->
 
-    <!-- Button trigger modal -->
-    <!-- <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#exampleModal"
-    >Edit</button> -->
-
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">Donation Total: {{ donationTotal }}</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+              <DonationDetails
+      class
+      v-for="donationItem in donations"
+      :donationData="donationItem"
+      :key="donationItem._id"
+    ></DonationDetails>
+        </ul>
+      </div>
+    </div>
     <!-- Modal -->
     <div
       class="modal fade"
@@ -202,11 +111,11 @@
         </div>
       </div>
     </div>
-    
+
     <!-- <org></org> -->
     <h1>Donation Total: {{ donationTotal }}</h1>
     <DonationDetails
-      class=""
+      class
       v-for="donationItem in donations"
       :donationData="donationItem"
       :key="donationItem._id"
@@ -233,11 +142,11 @@ export default {
       return this.$store.state.donations;
     },
     donationTotal() {
-      let i = 0
-      let donations = this.$store.state.donations
-      let total = 0
-      for (i = 0; i < donations.length ; i++){
-        total+= donations[i].amount
+      let i = 0;
+      let donations = this.$store.state.donations;
+      let total = 0;
+      for (i = 0; i < donations.length; i++) {
+        total += donations[i].amount;
       }
       return total;
     }

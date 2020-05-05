@@ -29,20 +29,6 @@
       </div>
     </div>
 
-    <!-- <div class="row">
-
-      <div class="col-12 text-center">
-        <img class="img-fluid w-80" :src="orgData.picture" />
-      </div>
-
-  </div>
-
-    <div class="row text-center">
-      <div class="col-12">
-        <h1>{{orgData.name}}</h1>
-      </div>
-    </div>-->
-
     <div class="row text-center m-3">
       <div class="col-6 offset-3">
         <button
@@ -151,9 +137,9 @@ export default {
       }
       this.$store.dispatch("next", currentOrg);
     },
-    donate(donationType) {
-      let amount = 0;
-      amount = prompt("How much do you want to donate?", this.profile.default);
+    donate(amount) {
+      //let amount = 0;
+      //amount = prompt("How much do you want to donate?", this.profile.default);
 
       if (amount) {
         let donation = {
@@ -171,13 +157,16 @@ export default {
       this.$store.commit("setActiveOrg", this.filteredList[0]);
     },
     setLoaded: function(loaded) {
+      let data = {}
       this.loaded = true;
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
             //console.log("setLoaded", );
+            //this.donate(this.profile.default)
 
-            return actions.order.create({
+            //return  
+            let data2 = actions.order.create({
               purchase_units: [
                 {
                   description: "this is a donation",
@@ -188,6 +177,10 @@ export default {
                 }
               ]
             });
+            this.donate(this.profile.default)
+            console.log(data2)
+            return data2
+
           }
         })
         .render(this.$refs.paypal);

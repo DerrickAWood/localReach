@@ -1,8 +1,8 @@
 <template>
-  <div class="welcome container-fluid">
+  <div class="welcome container-fluid bg">
 
     <div class="card bg-dark text-white m-3">
-  <img src="https://images.pexels.com/photos/1250452/pexels-photo-1250452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="card-img" alt="">
+
   <div class="card-img-overlay text-center">
     <h1 class="card-title">Welcome to Local Reach</h1>
     <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, exercitationem, quos reiciendis nulla repellendus excepturi tempora unde iure perferendis vero ipsam fugit, cum illum deleniti in similique tenetur quasi laborum.</h4>
@@ -34,3 +34,20 @@ export default {
    }
 };
 </script>
+
+<style scoped>
+img {
+  max-height: 85%;
+  min-height: 75%;
+}
+
+.bg {
+  background-image: url("https://images.pexels.com/photos/1250452/pexels-photo-1250452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") ;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  background-size: cover;
+
+
+}
+</style>
