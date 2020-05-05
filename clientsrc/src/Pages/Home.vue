@@ -45,9 +45,34 @@
 
     <div class="row text-center m-3">
       <div class="col-6 offset-3">
-        <button class="btn btn-block btn-primary" @click="donate()">Donate</button>
+        <button
+          class="btn btn-block btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          @click="setLoaded"
+        >Donate</button>
+        <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Donate</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Modal body text goes here.</p>
+                <div ref="paypal"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div ref="paypal"></div>
+      <!-- <div ref="paypal"></div> -->
     </div>
     <hr />
     <org-details></org-details>
@@ -63,8 +88,8 @@ export default {
     return {
       search: "",
       searchLocations: "",
-      loaded: false,
-      product: { price: 5, description: "You made a donation" }
+      loaded: false
+      //product: { price: 5, description: "You made a donation" }
     };
   },
   computed: {
@@ -148,13 +173,15 @@ export default {
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
+            //console.log("setLoaded", );
+
             return actions.order.create({
               purchase_units: [
                 {
                   description: "this is a donation",
                   amount: {
                     currency_code: "USD",
-                    value: this.product.price
+                    value: this.profile.default
                   }
                 }
               ]
