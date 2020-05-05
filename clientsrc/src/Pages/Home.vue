@@ -49,7 +49,6 @@
           class="btn btn-block btn-primary"
           data-toggle="modal"
           data-target="#exampleModal"
-          @click="setLoaded"
         >Donate</button>
         <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
@@ -61,18 +60,20 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                <h5 class="m-1 pr-2 pl-3 tskName">How Much Would You Like to Donate?</h5>
+              <input
+                class="pr-4 pl-2 inputTask m-3"
+                type="text"
+                placeholder="add default amount..."
+                v-model="profile.default"
+                required
+              />
                 <div ref="paypal"></div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div ref="paypal"></div> -->
     </div>
     <hr />
     <org-details></org-details>
@@ -168,7 +169,7 @@ export default {
       console.log("searchOrgs", this.filteredList[0]);
       this.$store.commit("setActiveOrg", this.filteredList[0]);
     },
-    setLoaded: function() {
+    setLoaded: function(loaded) {
       this.loaded = true;
       window.paypal
         .Buttons({
