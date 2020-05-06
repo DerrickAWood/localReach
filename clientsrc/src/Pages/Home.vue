@@ -1,32 +1,27 @@
 <template>
   <div class="home container-fluid">
     <div class="row justify-content-between">
-        <form class="form-inline my-2 my-lg-0 m-lg-2">
-          <input
-            class="form-control mr-sm-2 col-6"
-            type="search"
-            placeholder="Organization or Location"
-            aria-label="Search"
-            v-model="search"
-          />
-          <button
-            class="btn btn-primary my-2 my-sm-0"
-            @click="searchOrgs()"
-            type="submit"
-          >Search</button>
-        </form>
+      <form class="form-inline my-2 my-lg-0 m-lg-2">
+        <input
+          class="form-control mr-sm-2 col-6"
+          type="search"
+          placeholder="Organization or Location"
+          aria-label="Search"
+          v-model="search"
+        />
+        <button class="btn btn-primary my-2 my-sm-0" @click="searchOrgs()" type="submit">Search</button>
+      </form>
       <div>
         <button class="btn btn-primary my-2 my-sm-0 mr-2 mt-3 mt-lg-2" @click="next()">NEXT</button>
       </div>
-      <div class=" col-12 text-center">
+      <div class="col-12 text-center">
         <h1 class="card-title">{{orgData.name}}</h1>
       </div>
     </div>
 
     <div class="card bg-dark text-white">
       <img :src="orgData.picture" class="card-img" alt />
-      <div class="card-img-overlay text-center text-dark">
-      </div>
+      <div class="card-img-overlay text-center text-dark"></div>
     </div>
 
     <div class="row text-center m-3">
@@ -47,13 +42,13 @@
               </div>
               <div class="modal-body">
                 <h5 class="m-1 pr-2 pl-3 tskName">How Much Would You Like to Donate?</h5>
-              <input
-                class="pr-4 pl-2 inputTask m-3"
-                type="text"
-                placeholder="add default amount..."
-                v-model="profile.default"
-                required
-              />
+                <input
+                  class="pr-4 pl-2 inputTask m-3"
+                  type="text"
+                  placeholder="add default amount..."
+                  v-model="profile.default"
+                  required
+                />
                 <div ref="paypal"></div>
               </div>
             </div>
@@ -113,29 +108,26 @@ export default {
           out.push(listItem);
         }
       }
-      this.$store.commit('setFilteredOrgs', out)
+      this.$store.commit("setFilteredOrgs", out);
       return out;
     }
   },
   mounted() {
-    //debugger
     this.$store.dispatch("getOrgs");
-    //this.$store.dispatch("next", 0);
     const script = document.createElement("script");
-    //console.log("mounted", this.orgData.clientId)
-    console.log("mounted", this.orgData)
-//<img :src="orgData.picture" class="card-img" alt />
-     script.src =
-     "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
+    console.log("mounted", this.orgData);
+    script.src =
+      "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
     //  script.src =
     //  "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
-        // script.src =`https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
+    // script.src =`https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
+    script.id = "clientId"
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
   },
   methods: {
     next() {
-      console.log("next", this.orgData.clientId)
+      console.log("next", this.orgData.clientId);
       let currentOrg = 0;
       currentOrg = this.currentIndex;
       currentOrg += 1;
@@ -145,18 +137,17 @@ export default {
       this.$store.dispatch("next", currentOrg);
     },
     donate(amount) {
-      console.log( "donate",  )
-      console.log( "donate", document.body )
-    //   if (this.orgData.clientId){
-    //     script.src =
-    //   "https://www.paypal.com/sdk/js?client-id=" + this.orgData.clientId;
-    //   } else{
-    //     script.src =
-    // "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
-
-     // }
-      //let amount = 0;
-      //amount = prompt("How much do you want to donate?", this.profile.default);
+      console.log("donate");
+      console.log("donate", document.body);
+      console.log (document.getElementById("clientId").src )
+document.getElementById("clientId").src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`
+      //script.src =
+      //  "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
+      //  script.src =
+      //  "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
+      //  script.src =`https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
+      // script.addEventListener("load", this.setLoaded);
+      // document.body.appendChild(script);
 
       if (amount) {
         let donation = {
@@ -174,16 +165,16 @@ export default {
       this.$store.commit("setActiveOrg", this.filteredList[0]);
     },
     setLoaded: function(loaded) {
-      let data = {}
+      let data = {};
       this.loaded = true;
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
-            console.log("data",data );
-            console.log("actions",actions );
+            console.log("data", data);
+            console.log("actions", actions);
             //this.donate(this.profile.default)
 
-            //return  
+            //return
             let data2 = actions.order.create({
               purchase_units: [
                 {
@@ -195,10 +186,9 @@ export default {
                 }
               ]
             });
-            this.donate(this.profile.default)
-            console.log(data2)
-            return data2
-
+            this.donate(this.profile.default);
+            console.log(data2);
+            return data2;
           }
         })
         .render(this.$refs.paypal);
