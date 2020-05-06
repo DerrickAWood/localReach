@@ -122,13 +122,20 @@ export default {
     this.$store.dispatch("getOrgs");
     //this.$store.dispatch("next", 0);
     const script = document.createElement("script");
-    script.src =
-      "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
+    //console.log("mounted", this.orgData.clientId)
+    console.log("mounted", this.orgData)
+//<img :src="orgData.picture" class="card-img" alt />
+     script.src =
+     "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
+    //  script.src =
+    //  "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
+        // script.src =`https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
   },
   methods: {
     next() {
+      console.log("next", this.orgData.clientId)
       let currentOrg = 0;
       currentOrg = this.currentIndex;
       currentOrg += 1;
@@ -138,6 +145,16 @@ export default {
       this.$store.dispatch("next", currentOrg);
     },
     donate(amount) {
+      console.log( "donate",  )
+      console.log( "donate", document.body )
+    //   if (this.orgData.clientId){
+    //     script.src =
+    //   "https://www.paypal.com/sdk/js?client-id=" + this.orgData.clientId;
+    //   } else{
+    //     script.src =
+    // "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
+
+     // }
       //let amount = 0;
       //amount = prompt("How much do you want to donate?", this.profile.default);
 
@@ -162,7 +179,8 @@ export default {
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
-            //console.log("setLoaded", );
+            console.log("data",data );
+            console.log("actions",actions );
             //this.donate(this.profile.default)
 
             //return  

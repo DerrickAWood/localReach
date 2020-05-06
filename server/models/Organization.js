@@ -19,7 +19,8 @@ const Organization = new Schema(
     organizationEmail: {type: String, lowercase: true, unique: true},
     website: {type: String},
     links: {type: String},
-    EIN: {type: String} // make required later
+    EIN: {type: String}, // make required later
+    clientId: {type: String} // make required later
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

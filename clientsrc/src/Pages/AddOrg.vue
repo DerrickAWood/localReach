@@ -69,7 +69,7 @@
         />
       </div>
       <button type="submit" class="btn btn-success">Save</button>
-    </form> -->
+    </form>-->
 
     <!-- Button trigger modal -->
     <button
@@ -114,74 +114,84 @@
               </div>
 
               <div v-show="newOrg.name != orgApiData.name">
-
-              <h5 class="m-1 pr-2 pl-3 tskName">Name:</h5>
-              <input 
-                class="pr-4 pl-2 inputTask"
-                type="text"
-                placeholder="add name of organization..."
-                v-model="orgApiData.name"
-                required
-                disabled
-              />
-              <h5 class="m-1 pr-2 pl-3 tskName">picture:</h5>
-              <input
-                class="pr-4 pl-2 inputTask"
-                type="text"
-                placeholder="add picture..."
-                v-model="newOrg.picture"
-              />
-              <h5 class="m-1 pr-2 pl-3 tskName">address:</h5>
-              <input
-                class="pr-4 pl-2 inputTask"
-                type="text"
-                placeholder="add address..."
-                v-model="orgApiData.address"
-                required
-                disabled
-              />
-              <h5 class="m-1 pr-2 pl-3 tskName">payment:</h5>
-              <input
-                class="pr-4 pl-2 inputTask"
-                type="text"
-                placeholder="add payment..."
-                v-model="newOrg.payment"
-                required
-              />
-              <h5 class="m-1 pr-2 pl-3 tskName">email:</h5>
-              <input
-                class="pr-4 pl-2 inputTask"
-                type="text"
-                placeholder="add email..."
-                v-model="newOrg.organizationEmail"
-                required
-              />
-
-              <div class="form-group">
-                <label for="body">Website</label>
+                <h5 class="m-1 pr-2 pl-3 tskName">Name:</h5>
                 <input
+                  class="pr-4 pl-2 inputTask"
                   type="text"
-                  name="body"
-                  id
-                  class="form-control"
-                  placeholder="enter website link..."
-                  aria-describedby="helpId"
-                  v-model="newOrg.website"
+                  placeholder="add name of organization..."
+                  v-model="orgApiData.name"
+                  required
+                  disabled
                 />
-              </div>
-              <div class="form-group">
-                <label for="body">links</label>
+                <h5 class="m-1 pr-2 pl-3 tskName">picture:</h5>
                 <input
+                  class="pr-4 pl-2 inputTask"
                   type="text"
-                  name="body"
-                  id
-                  class="form-control"
-                  placeholder="enter social media links..."
-                  aria-describedby="helpId"
-                  v-model="newOrg.links"
+                  placeholder="add picture..."
+                  v-model="newOrg.picture"
                 />
-              </div>
-              
+                <h5 class="m-1 pr-2 pl-3 tskName">address:</h5>
+                <input
+                  class="pr-4 pl-2 inputTask"
+                  type="text"
+                  placeholder="add address..."
+                  v-model="orgApiData.address"
+                  required
+                  disabled
+                />
+                <h5 class="m-1 pr-2 pl-3 tskName">payment:</h5>
+                <input
+                  class="pr-4 pl-2 inputTask"
+                  type="text"
+                  placeholder="add payment..."
+                  v-model="newOrg.payment"
+                  required
+                />
+                <h5 class="m-1 pr-2 pl-3 tskName">email:</h5>
+                <input
+                  class="pr-4 pl-2 inputTask"
+                  type="text"
+                  placeholder="add email..."
+                  v-model="newOrg.organizationEmail"
+                  required
+                />
+
+                <div class="form-group">
+                  <label for="body">Website</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter website link..."
+                    aria-describedby="helpId"
+                    v-model="newOrg.website"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="body">links</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter social media links..."
+                    aria-describedby="helpId"
+                    v-model="newOrg.links"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="body">Client ID</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter client ID..."
+                    aria-describedby="helpId"
+                    v-model="newOrg.clientId"
+                  />
+                </div>
               </div>
             </form>...
           </div>
@@ -204,7 +214,7 @@
       v-for="donationItem in donations"
       :donationData="donationItem"
       :key="donationItem._id"
-    ></DonationDetails> -->
+    ></DonationDetails>-->
   </div>
 </template>
 
@@ -223,26 +233,26 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
-    orgApiData(){
-      return this.$store.state.orgApiData
+    orgApiData() {
+      return this.$store.state.orgApiData;
     }
   },
   mounted() {
-  //  this.$store.dispatch("getDonations");
+    //  this.$store.dispatch("getDonations");
   },
   methods: {
     addOrg() {
       console.log("addOrg", this.newOrg);
-      this.newOrg.name = this.orgApiData.name 
-      this.newOrg.address = this.orgApiData.address
+      this.newOrg.name = this.orgApiData.name;
+      this.newOrg.address = this.orgApiData.address;
       this.$store.dispatch("addOrg", this.newOrg);
       this.newOrg = {};
     },
-    checkEin(){
+    checkEin() {
       // let ein = prompt("What is your ein?")
-       this.$store.dispatch("getApiOrg", this.newOrg.EIN)
+      this.$store.dispatch("getApiOrg", this.newOrg.EIN);
     }
-  },
+  }
   //components: {  }
 };
 </script>
