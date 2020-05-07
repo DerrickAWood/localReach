@@ -177,7 +177,7 @@ img {
 }
 
 .comcom {
-  max-height: 90%;
+  max-height: 50vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
