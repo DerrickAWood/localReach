@@ -24,47 +24,7 @@
       <div class="card-img-overlay text-center text-dark"></div>
     </div>
 
-    <!-- <div class="row text-center m-3"> -->
-    <!-- <div class="col-6 offset-3">
-        <button
-          class="btn btn-block btn-primary"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >Donate</button>
-        <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Donate</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <h5 class="m-1 pr-2 pl-3 tskName">How Much Would You Like to Donate?</h5>
-                <input
-                  class="pr-4 pl-2 inputTask m-3"
-                  type="text"
-                  placeholder="add default amount..."
-                  v-model="profile.default"
-                  required
-                />
-                <div ref="paypal"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>-->
-    <!-- </div> -->
-
-    <!-- <DonationDetails
-                class
-                v-for="donationItem in donations"
-                :donationData="donationItem"
-                :key="donationItem._id"
-    ></DonationDetails>-->
-
-    <OrgDonation :orgData="orgData"></OrgDonation>
+    <OrgDonation :orgData="orgData" v-if="orgData"></OrgDonation>
     <hr />
     <org-details></org-details>
   </div>
@@ -108,10 +68,6 @@ export default {
 
       for (let i = 0; i < list.length; i++) {
         let listItem = list[i];
-        // if (listItem.name.toLowerCase().includes(this.search.toLowerCase()) &&
-        //  listItem.address.toLowerCase().includes(this.searchLocations.toLowerCase()) ){
-        //    out.push(listItem)
-        // }
         if (
           listItem.name.toLowerCase().includes(this.search.toLowerCase()) ||
           listItem.address.toLowerCase().includes(this.search.toLowerCase())
@@ -125,19 +81,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getOrgs");
-    const script = document.createElement("script");
-    console.log("mounted", this.orgData);
-    // script.src =
-    // ("https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6");
-    // "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
-    // script.src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
-    script.id = "clientId";
-    script.addEventListener("load", this.setLoaded);
-    document.body.appendChild(script);
   },
   methods: {
     next() {
-      console.log("next", this.orgData.clientId);
+      // console.log("next", this.orgData.clientId);
       let currentOrg = 0;
       currentOrg = this.currentIndex;
       currentOrg += 1;
@@ -146,67 +93,9 @@ export default {
       }
       this.$store.dispatch("next", currentOrg);
     },
-    donate(amount) {
-      console.log("donate-clientId", this.orgData.clientId);
-      console.log(document.getElementById("clientId").src);
-      document.getElementById(
-        "clientId"
-      ).src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
-      console.log(document.getElementById("clientId").src);
-      console.log("body", document.body);
-      // window.paypal.Buttons.instances = []
-      // this.setLoaded()
-      //script.src =
-      //  "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
-      //  script.src =
-      //  "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
-      //  script.src =`https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
-      // script.addEventListener("load", this.setLoaded);
-      // document.body.appendChild(script);
 
-      if (amount) {
-        let donation = {
-          amount: amount,
-          userId: this.profile.id,
-          organizationId: this.orgData.id
-        };
-        console.log("from donateDefault", donation);
-        this.$store.dispatch("donate", donation);
-      }
-    },
     async searchOrgs() {
-      console.log("searchOrgs", this.filteredList);
-      console.log("searchOrgs", this.filteredList[0]);
       this.$store.commit("setActiveOrg", this.filteredList[0]);
-    },
-    setLoaded: function(loaded) {
-      let data = {};
-      this.loaded = true;
-      window.paypal
-        .Buttons({
-          createOrder: (data, actions) => {
-            console.log("data", data);
-            console.log("actions", actions);
-            //this.donate(this.profile.default)
-
-            //return
-            let data2 = actions.order.create({
-              purchase_units: [
-                {
-                  description: "this is a donation",
-                  amount: {
-                    currency_code: "USD",
-                    value: this.profile.default
-                  }
-                }
-              ]
-            });
-            this.donate(this.profile.default);
-            console.log(data2);
-            return data2;
-          }
-        })
-        .render(this.$refs.paypal);
     }
   },
   components: { OrgDetails, OrgDonation }

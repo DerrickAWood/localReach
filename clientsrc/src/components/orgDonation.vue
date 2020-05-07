@@ -49,93 +49,36 @@ export default {
     profile() {
       console.log("from profilex", this.$store.state.profile);
       return this.$store.state.profile;
-    },
-    currentIndex() {
-      return this.$store.state.orgIndex;
-    },
-    numOrgs() {
-      return this.$store.state.orgs.length;
-    },
-    orgs() {
-      return this.$store.state.orgs;
-    },
-    filteredList() {
-      let out = [];
-      let list = this.$store.state.orgs;
-
-      for (let i = 0; i < list.length; i++) {
-        let listItem = list[i];
-        // if (listItem.name.toLowerCase().includes(this.search.toLowerCase()) &&
-        //  listItem.address.toLowerCase().includes(this.searchLocations.toLowerCase()) ){
-        //    out.push(listItem)
-        // }
-        if (
-          listItem.name.toLowerCase().includes(this.search.toLowerCase()) ||
-          listItem.address.toLowerCase().includes(this.search.toLowerCase())
-        ) {
-          out.push(listItem);
-        }
-      }
-      this.$store.commit("setFilteredOrgs", out);
-      return out;
     }
   },
   beforeUpdate() {
-    // this.$store.dispatch("getOrgs");
+    console.log("beforeUpdate", this.orgData);
     const script = document.createElement("script");
-    console.log("OrgDonation", this.orgData);
-    // script.src =
-    //   "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
-    // "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
-    script.src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
-    script.id = "clientId";
+    if (this.orgData.clientId) {
+      // script.src =
+      //   "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
+      // "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
+      //script.id = "clientId";
+    } else {
+      console.log("else");
+      script.src =
+        "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
+    }
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
   },
   methods: {
-    next() {
-      console.log("next", this.orgData.clientId);
-      let currentOrg = 0;
-      currentOrg = this.currentIndex;
-      currentOrg += 1;
-      if (currentOrg == this.filteredList.length) {
-        currentOrg = 0;
-      }
-      this.$store.dispatch("next", currentOrg);
-    },
     donate(amount) {
-      // console.log("donate");
-      // console.log("donate-clientId", this.orgData.clientId);
-      // console.log(document.getElementById("clientId").src);
-      // document.getElementById(
-      //   "clientId"
-      // ).src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
-      // console.log(document.getElementById("clientId").src);
-      // console.log("body", document.body);
-      // window.paypal.Buttons.instances = []
-      // this.setLoaded()
-      //script.src =
-      //  "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
-      //  script.src =
-      //  "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
-      //  script.src =`https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
-      // script.addEventListener("load", this.setLoaded);
-      // document.body.appendChild(script);
-
       if (amount) {
         let donation = {
           amount: amount,
           userId: this.profile.id,
           organizationId: this.orgData.id
         };
-        console.log("from donateDefault", donation);
+        // console.log("from donateDefault", donation);
         this.$store.dispatch("donate", donation);
       }
-    },
-    async searchOrgs() {
-      console.log("searchOrgs", this.filteredList);
-      console.log("searchOrgs", this.filteredList[0]);
-      this.$store.commit("setActiveOrg", this.filteredList[0]);
     },
     setLoaded: function(loaded) {
       let data = {};
@@ -143,11 +86,6 @@ export default {
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
-            console.log("data", data);
-            console.log("actions", actions);
-            //this.donate(this.profile.default)
-
-            //return
             let data2 = actions.order.create({
               purchase_units: [
                 {
@@ -160,7 +98,6 @@ export default {
               ]
             });
             this.donate(this.profile.default);
-            console.log(data2);
             return data2;
           }
         })
