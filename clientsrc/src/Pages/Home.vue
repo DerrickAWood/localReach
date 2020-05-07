@@ -24,8 +24,8 @@
       <div class="card-img-overlay text-center text-dark"></div>
     </div>
 
-        <div class="row text-center m-3">
-      <div class="col-6 offset-3">
+    <!-- <div class="row text-center m-3"> -->
+    <!-- <div class="col-6 offset-3">
         <button
           class="btn btn-block btn-primary"
           data-toggle="modal"
@@ -54,14 +54,24 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </div>-->
+    <!-- </div> -->
+
+    <!-- <DonationDetails
+                class
+                v-for="donationItem in donations"
+                :donationData="donationItem"
+                :key="donationItem._id"
+    ></DonationDetails>-->
+
+    <OrgDonation :orgData="orgData"></OrgDonation>
     <hr />
     <org-details></org-details>
   </div>
 </template>
 
 <script>
+import OrgDonation from "../components/OrgDonation";
 import OrgDetails from "../components/OrgDetails";
 export default {
   name: "home",
@@ -76,6 +86,7 @@ export default {
   },
   computed: {
     orgData() {
+      console.log("orgData", this.$store.state.activeOrg);
       return this.$store.state.activeOrg;
     },
     profile() {
@@ -115,12 +126,12 @@ export default {
   mounted() {
     this.$store.dispatch("getOrgs");
     const script = document.createElement("script");
-    console.log("mounted", this.orgs);
-     script.src =
-     "https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6";
-      // "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
-    //  script.src =`https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
-    script.id = "clientId"
+    console.log("mounted", this.orgData);
+    // script.src =
+    // ("https://www.paypal.com/sdk/js?client-id=AXVku1rBN3Z1MbP9hLn_3u3PnILdDpe_iG5CWzvzgYfuyMATqQ-hybUMbn33mmFH041mm7lGMkJsWkK6");
+    // "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
+    // script.src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
+    script.id = "clientId";
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
   },
@@ -136,13 +147,14 @@ export default {
       this.$store.dispatch("next", currentOrg);
     },
     donate(amount) {
-      console.log("donate");
       console.log("donate-clientId", this.orgData.clientId);
-      console.log (document.getElementById("clientId").src )
-      document.getElementById("clientId").src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`
-      console.log(document.getElementById("clientId").src)
-      console.log("body", document.body)
-      // window.paypal.Buttons.instances = [] 
+      console.log(document.getElementById("clientId").src);
+      document.getElementById(
+        "clientId"
+      ).src = `https://www.paypal.com/sdk/js?client-id=${this.orgData.clientId}`;
+      console.log(document.getElementById("clientId").src);
+      console.log("body", document.body);
+      // window.paypal.Buttons.instances = []
       // this.setLoaded()
       //script.src =
       //  "https://www.paypal.com/sdk/js?client-id=AXesV42Zwn2DWTLAVi_KpQsClbGyzfQ_0HgVtPCcOVe9FHBUm69UK111l3vzIfQ2iKH7Wu8H9o50UPxA";
@@ -197,7 +209,7 @@ export default {
         .render(this.$refs.paypal);
     }
   },
-  components: { OrgDetails }
+  components: { OrgDetails, OrgDonation }
 };
 </script>
 
