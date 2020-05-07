@@ -98,6 +98,7 @@ export default {
               ]
             });
             this.donate(this.profile.default);
+            //console.log(window.paypal.Buttons)
             return data2;
           }
         })

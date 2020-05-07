@@ -29,7 +29,7 @@
         <div class="m-auto col-10 col-md-8 justify-content-center">
           <div class="card" style="">
             <div class="card-header">Donation Total: {{ donationTotal }}</div>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush comcom">
               <DonationDetails
                 class
                 v-for="donationItem in donations"
@@ -174,5 +174,11 @@ export default {
 <style scoped>
 img {
   max-width: 100px;
+}
+
+.comcom {
+  max-height: 150px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 </style>
