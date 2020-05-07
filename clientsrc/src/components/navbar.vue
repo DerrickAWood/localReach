@@ -1,6 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-    <router-link class="navbar-brand" :to="{ name: 'Home' }">Local Reach</router-link>
+    <router-link class="navbar-brand" :to="{ name: 'Home' }">
+      <span class="localReach">localReach</span>
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -72,4 +74,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+.localReach {
+  font-family: "Pacifico", cursive;
+}
+</style>

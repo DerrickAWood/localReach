@@ -15,7 +15,7 @@
         <button class="btn btn-primary my-2 my-sm-0 mr-2 mt-3 mt-lg-2" @click="next()">NEXT</button>
       </div>
       <div class="col-12 text-center">
-        <h1 class="card-title">{{orgData.name}}</h1>
+        <h3 class="card-title">{{orgData.name}}</h3>
       </div>
     </div>
 
