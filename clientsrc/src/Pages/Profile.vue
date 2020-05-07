@@ -1,17 +1,17 @@
 <template>
-  <div class="about container-fluid text-center">
+  <div class="about bg container-fluid text-center">
     <div class="row">
       <div class="m-auto col-10 col-md-8 justify-content-center">
-        <div class="card text-center mt-3">
+        <div class="text-center text-white mt-3 bg-transparent shadow-lg">
           <img :src="profile.picture" class="card-img-top mx-auto mt-3 d-block" alt />
-          <div class="card-body">
+          <div class="card-body bg-transparent">
             <h5 class="card-title">Welcome, {{ profile.name }}</h5>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">email: {{ profile.email }}</li>
-            <li class="list-group-item">Location: {{ profile.location }}</li>
-            <li class="list-group-item">Payment Info: {{ profile.payment }}</li>
-            <li class="list-group-item">Default Payment Amount: {{ profile.default }}</li>
+            <li class="list-group-item bg-transparent">email: {{ profile.email }}</li>
+            <li class="list-group-item bg-transparent">Location: {{ profile.location }}</li>
+            <li class="list-group-item bg-transparent">Payment Info: {{ profile.payment }}</li>
+            <li class="list-group-item bg-transparent">Default Payment Amount: {{ profile.default }}</li>
           </ul>
           <div class="card-body">
             <button
@@ -23,24 +23,24 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
 
-      <div class="row mt-3">
-        <div class="m-auto col-10 col-md-8 justify-content-center">
-          <div class="card" style="">
-            <div class="card-header">Donation Total: {{ donationTotal }}</div>
-            <ul class="list-group list-group-flush comcom">
-              <DonationDetails
-                class
-                v-for="donationItem in donations"
-                :donationData="donationItem"
-                :key="donationItem._id"
-              ></DonationDetails>
-            </ul>
-          </div>
+    <div class="row mt-3">
+      <div class="m-auto col-10 col-md-8 justify-content-center">
+        <div class="card" style>
+          <div class="card-header">Donation Total: {{ donationTotal }}</div>
+          <ul class="list-group list-group-flush comcom">
+            <DonationDetails
+              class
+              v-for="donationItem in donations"
+              :donationData="donationItem"
+              :key="donationItem._id"
+            ></DonationDetails>
+          </ul>
         </div>
       </div>
-  
+    </div>
+
     <!-- Modal -->
     <div
       class="modal fade"
@@ -180,5 +180,13 @@ img {
   max-height: 50vh;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.bg {
+  background-image: url("https://images.pexels.com/photos/1250452/pexels-photo-1250452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-size: cover;
 }
 </style>
