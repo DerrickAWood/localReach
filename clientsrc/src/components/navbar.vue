@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-white bg-transparent">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <router-link class="navbar-brand" :to="{ name: 'Home' }">Local Reach</router-link>
     <button
       class="navbar-toggler"
