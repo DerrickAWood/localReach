@@ -1,22 +1,30 @@
 <template>
   <div class="home container-fluid">
     <div class="row justify-content-around">
-    <div class="col-1 p-0">
-      <button class="btn btn-primary mt-2 mt-lg-2" @click="next(-1)">&lt;
-</button>
-    </div>
-    <div class="col-8 "> 
+      <div class="col-1 p-0">
+        <button class="btn btn-primary mt-2 mt-lg-2" @click="next(-1)">&lt;</button>
+      </div>
+      <div class="col-8">
+        <div class="input-group mt-2">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Organization or Location"
+            aria-label="Search"
+            aria-describedby="button-addon2"
+            v-model="search"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary"
+              type="submit"
+              @click="searchOrgs()"
+              id="button-addon2"
+            >Find</button>
+          </div>
+        </div>
 
-<div class="input-group mt-2">
-  <input type="search" class="form-control" placeholder="Organization or Location" aria-label="Search" aria-describedby="button-addon2"
-  v-model="search">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="submit" @click="searchOrgs()" id="button-addon2">Find</button>
-  </div>
-</div>
-
-
-      <!-- <form class="form-inline my-2 my-lg-0 m-lg-2">
+        <!-- <form class="form-inline my-2 my-lg-0 m-lg-2">
         <input
           class="form-control mr-sm-2"
           type="search"
@@ -25,8 +33,8 @@
           v-model="search"
         />
         <button class="btn btn-primary my-2 my-sm-0" @click="searchOrgs()" type="submit">Search</button>
-      </form> -->
-    </div>
+        </form>-->
+      </div>
       <div class="col-1 p-0">
         <button class="btn btn-primary mt-2 mt-lg-2" @click="next(1)">&gt;</button>
       </div>
@@ -35,7 +43,7 @@
       </div>
     </div>
 
-    <div class="card bg-dark text-white">
+    <div class="card bg-dark text-white" id="swipe">
       <img :src="orgData.picture" class="card-img img-fluid" alt />
       <div class="card-img-overlay text-center text-dark"></div>
     </div>
@@ -56,7 +64,10 @@ export default {
     return {
       search: "",
       searchLocations: "",
-      loaded: false
+      loaded: false,
+      container: document.querySelector("swipe"),
+      initialX: null,
+      initialY: null
       //product: { price: 5, description: "You made a donation" }
     };
   },
@@ -99,7 +110,7 @@ export default {
     this.$store.dispatch("getOrgs");
   },
   methods: {
-    next( num ) {
+    next(num) {
       // console.log("next", this.orgData.clientId);
       let currentOrg = 0;
       currentOrg = this.currentIndex;
@@ -111,10 +122,15 @@ export default {
         currentOrg = 0;
       }
       if (currentOrg == -1) {
-        currentOrg = this.filteredList.length -1;
+        currentOrg = this.filteredList.length - 1;
       }
       //console.log("nextIF", currentOrg)
       this.$store.dispatch("next", currentOrg);
+    },
+    startTouch(e) {
+      console.log("startTouch");
+      initialX = e.touches[0].clientX;
+      initialY = e.touches[0].clientY;
     },
 
     async searchOrgs() {
@@ -130,7 +146,7 @@ img {
   /* max-height: 75vh; */
   /* min-height: 75%; */
   /* max-width: auto; */
-   /* max-width: 95vw; */
+  /* max-width: 95vw; */
   height: 50vh;
   image-rendering: auto;
 }
