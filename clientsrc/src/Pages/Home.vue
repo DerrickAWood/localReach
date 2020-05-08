@@ -1,18 +1,34 @@
 <template>
   <div class="home container-fluid">
-    <div class="row justify-content-between">
-      <form class="form-inline my-2 my-lg-0 m-lg-2">
+    <div class="row justify-content-around">
+    <div class="col-1 p-0">
+      <button class="btn btn-primary mt-2 mt-lg-2" @click="next()">&lt;
+</button>
+    </div>
+    <div class="col-8 "> 
+
+<div class="input-group mt-2">
+  <input type="search" class="form-control" placeholder="Organization or Location" aria-label="Search" aria-describedby="button-addon2"
+  v-model="search">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" @click="searchOrgs()" id="button-addon2">Find</button>
+  </div>
+</div>
+
+
+      <!-- <form class="form-inline my-2 my-lg-0 m-lg-2">
         <input
-          class="form-control mr-sm-2 col-6"
+          class="form-control mr-sm-2"
           type="search"
           placeholder="Organization or Location"
           aria-label="Search"
           v-model="search"
         />
         <button class="btn btn-primary my-2 my-sm-0" @click="searchOrgs()" type="submit">Search</button>
-      </form>
-      <div>
-        <button class="btn btn-primary my-2 my-sm-0 mr-2 mt-3 mt-lg-2" @click="next()">NEXT</button>
+      </form> -->
+    </div>
+      <div class="col-1 p-0">
+        <button class="btn btn-primary mt-2 mt-lg-2" @click="next()">&gt;</button>
       </div>
       <div class="col-12 text-center">
         <h3 class="card-title">{{orgData.name}}</h3>
