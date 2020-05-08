@@ -127,9 +127,9 @@ export default {
 
 <style scoped>
 img {
-  max-height: 50vh;
+  /* max-height: 75vh; */
   /* min-height: 75%; */
-  /* max-width: auto; */
-  /* height: 50vh; */
+  max-width: auto;
+  height: 50vh;
 }
 </style>
