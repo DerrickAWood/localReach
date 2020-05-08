@@ -2,7 +2,7 @@
   <div class="home container-fluid">
     <div class="row justify-content-around">
     <div class="col-1 p-0">
-      <button class="btn btn-primary mt-2 mt-lg-2" @click="next()">&lt;
+      <button class="btn btn-primary mt-2 mt-lg-2" @click="next(-1)">&lt;
 </button>
     </div>
     <div class="col-8 "> 
@@ -28,7 +28,7 @@
       </form> -->
     </div>
       <div class="col-1 p-0">
-        <button class="btn btn-primary mt-2 mt-lg-2" @click="next()">&gt;</button>
+        <button class="btn btn-primary mt-2 mt-lg-2" @click="next(1)">&gt;</button>
       </div>
       <div class="col-12 text-center">
         <h3 class="card-title">{{orgData.name}}</h3>
@@ -99,13 +99,16 @@ export default {
     this.$store.dispatch("getOrgs");
   },
   methods: {
-    next() {
+    next( num ) {
       // console.log("next", this.orgData.clientId);
       let currentOrg = 0;
       currentOrg = this.currentIndex;
-      currentOrg += 1;
+      currentOrg += num;
       if (currentOrg == this.filteredList.length) {
         currentOrg = 0;
+      }
+      if (currentOrg == -1) {
+        currentOrg = this.filteredList.length -1;
       }
       this.$store.dispatch("next", currentOrg);
     },
