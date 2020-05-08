@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     orgData() {
-      console.log("orgData", this.$store.state.activeOrg);
+      //console.log("orgData", this.$store.state.activeOrg);
       return this.$store.state.activeOrg;
     },
     profile() {
@@ -104,12 +104,16 @@ export default {
       let currentOrg = 0;
       currentOrg = this.currentIndex;
       currentOrg += num;
+
+      //console.log( "next%",  currentOrg % (this.filteredList.length) )
+
       if (currentOrg == this.filteredList.length) {
         currentOrg = 0;
       }
       if (currentOrg == -1) {
         currentOrg = this.filteredList.length -1;
       }
+      //console.log("nextIF", currentOrg)
       this.$store.dispatch("next", currentOrg);
     },
 

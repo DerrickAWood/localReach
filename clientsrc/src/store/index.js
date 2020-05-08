@@ -160,7 +160,7 @@ export default new Vuex.Store({
     }, orgIndex) {
       try {
         //debugger
-        console.log("next", orgIndex)
+        //console.log("next", orgIndex)
         await this.commit('setNextOrg', orgIndex)
       } catch (error) {
         console.error(error)

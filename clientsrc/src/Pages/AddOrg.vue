@@ -114,7 +114,7 @@
               </div>
 
               <div v-show="newOrg.name != orgApiData.name">
-                <h5 class="m-1 pr-2 pl-3 tskName">Name:</h5>
+                <!-- <h5 class="m-1 pr-2 pl-3 tskName">Name:</h5>
                 <input
                   class="pr-4 pl-2 inputTask"
                   type="text"
@@ -122,39 +122,63 @@
                   v-model="orgApiData.name"
                   required
                   disabled
-                />
-                <h5 class="m-1 pr-2 pl-3 tskName">picture:</h5>
-                <input
-                  class="pr-4 pl-2 inputTask"
-                  type="text"
-                  placeholder="add picture..."
-                  v-model="newOrg.picture"
-                />
-                <h5 class="m-1 pr-2 pl-3 tskName">address:</h5>
-                <input
-                  class="pr-4 pl-2 inputTask"
-                  type="text"
-                  placeholder="add address..."
-                  v-model="orgApiData.address"
-                  required
-                  disabled
-                />
-                <h5 class="m-1 pr-2 pl-3 tskName">payment:</h5>
-                <input
-                  class="pr-4 pl-2 inputTask"
-                  type="text"
-                  placeholder="add payment..."
-                  v-model="newOrg.payment"
-                  required
-                />
-                <h5 class="m-1 pr-2 pl-3 tskName">email:</h5>
-                <input
-                  class="pr-4 pl-2 inputTask"
-                  type="text"
-                  placeholder="add email..."
-                  v-model="newOrg.organizationEmail"
-                  required
-                />
+                /> -->
+
+                <div class="form-group">
+                  <label for="body">name:</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter name..."
+                    aria-describedby="helpId"
+                    v-model="orgApiData.name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="body">picture:</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter picture..."
+                    aria-describedby="helpId"
+                    v-model="newOrg.picture"
+                  />
+                </div>
+
+
+                <div class="form-group">
+                  <label for="body">address:</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter address..."
+                    aria-describedby="helpId"
+                    v-model="orgApiData.address"
+                  />
+                </div>
+
+
+
+
+                <div class="form-group">
+                  <label for="body">email</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter email..."
+                    aria-describedby="helpId"
+                    v-model="newOrg.email"
+                  />
+                </div>
 
                 <div class="form-group">
                   <label for="body">Website</label>
