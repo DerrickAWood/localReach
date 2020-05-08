@@ -129,7 +129,9 @@ export default {
 img {
   /* max-height: 75vh; */
   /* min-height: 75%; */
-  max-width: auto;
+  /* max-width: auto; */
+   /* max-width: 95vw; */
   height: 50vh;
+  image-rendering: auto;
 }
 </style>
