@@ -29,6 +29,7 @@
           </div>
         </div>
       </div>
+      <button @click="checkPaypal">Clickme</button>
     </div>
   </div>
 </template>
@@ -80,6 +81,12 @@ export default {
         this.$store.dispatch("donate", donation);
       }
     },
+
+    checkPaypal() {
+      console.log(window.paypal);
+    },
+
+    //ANCHOR try to access paypal pay now button in window
     setLoaded: function(loaded) {
       let data = {};
       this.loaded = true;
@@ -98,7 +105,7 @@ export default {
               ]
             });
             this.donate(this.profile.default);
-            //console.log(window.paypal.Buttons)
+            console.log("setLoaded", data2);
             return data2;
           }
         })
