@@ -36,7 +36,7 @@
     </div>
 
     <div class="card bg-dark text-white">
-      <img :src="orgData.picture" class="card-img" alt />
+      <img :src="orgData.picture" class="card-img img-fluid" alt />
       <div class="card-img-overlay text-center text-dark"></div>
     </div>
 
@@ -127,7 +127,9 @@ export default {
 
 <style scoped>
 img {
-  max-height: 85%;
-  min-height: 75%;
+  max-height: 50vh;
+  /* min-height: 75%; */
+  /* max-width: auto; */
+  /* height: 50vh; */
 }
 </style>

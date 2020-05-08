@@ -98,8 +98,8 @@
           </div>
           <div class="modal-body">
             <form class="mb-3" @submit.prevent="addOrg">
-              <div class="form-group">
-                <label for="body">EIN</label>
+              <div class="form-group" v-show="newOrg.name == orgApiData.name">
+                <label for="body">EIN:</label>
                 <input
                   type="text"
                   name="body"
@@ -110,10 +110,10 @@
                   v-model="newOrg.EIN"
                   required
                 />
-                <button @click="checkEin()">Check EIN</button>
+                <button class="btn btn-primary mt-2 btn-block" @click="checkEin()">Check EIN</button>
               </div>
 
-              <div v-show="newOrg.name != orgApiData.name">
+              <div v-show="newOrg.name !== orgApiData.name">
                 <!-- <h5 class="m-1 pr-2 pl-3 tskName">Name:</h5>
                 <input
                   class="pr-4 pl-2 inputTask"
@@ -125,7 +125,7 @@
                 /> -->
 
                 <div class="form-group">
-                  <label for="body">name:</label>
+                  <label for="body">Name:</label>
                   <input
                     type="text"
                     name="body"
@@ -136,23 +136,8 @@
                     v-model="orgApiData.name"
                   />
                 </div>
-
                 <div class="form-group">
-                  <label for="body">picture:</label>
-                  <input
-                    type="text"
-                    name="body"
-                    id
-                    class="form-control"
-                    placeholder="enter picture..."
-                    aria-describedby="helpId"
-                    v-model="newOrg.picture"
-                  />
-                </div>
-
-
-                <div class="form-group">
-                  <label for="body">address:</label>
+                  <label for="body">Address:</label>
                   <input
                     type="text"
                     name="body"
@@ -160,15 +145,25 @@
                     class="form-control"
                     placeholder="enter address..."
                     aria-describedby="helpId"
-                    v-model="orgApiData.address"
+                    v-model="address"
                   />
                 </div>
 
-
-
+                <div class="form-group">
+                  <label for="body">PayPal Client ID:</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter client ID..."
+                    aria-describedby="helpId"
+                    v-model="newOrg.clientId"
+                  />
+                </div> 
 
                 <div class="form-group">
-                  <label for="body">email</label>
+                  <label for="body">Email:</label>
                   <input
                     type="text"
                     name="body"
@@ -181,7 +176,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="body">Website</label>
+                  <label for="body">Website:</label>
                   <input
                     type="text"
                     name="body"
@@ -192,8 +187,22 @@
                     v-model="newOrg.website"
                   />
                 </div>
+
                 <div class="form-group">
-                  <label for="body">links</label>
+                  <label for="body">Picture:</label>
+                  <input
+                    type="text"
+                    name="body"
+                    id
+                    class="form-control"
+                    placeholder="enter picture..."
+                    aria-describedby="helpId"
+                    v-model="newOrg.picture"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="body">Links:</label>
                   <input
                     type="text"
                     name="body"
@@ -204,20 +213,9 @@
                     v-model="newOrg.links"
                   />
                 </div>
-                <div class="form-group">
-                  <label for="body">Client ID</label>
-                  <input
-                    type="text"
-                    name="body"
-                    id
-                    class="form-control"
-                    placeholder="enter client ID..."
-                    aria-describedby="helpId"
-                    v-model="newOrg.clientId"
-                  />
-                </div>
+
               </div>
-            </form>...
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -226,7 +224,7 @@
               class="btn btn-primary"
               data-dismiss="modal"
               @click="addOrg"
-            >Save changes</button>
+            >Submit</button>
           </div>
         </div>
       </div>
@@ -250,7 +248,8 @@ export default {
   name: "AddOrg",
   data() {
     return {
-      newOrg: {}
+      newOrg: {},
+      address: ""
     };
   },
   computed: {
@@ -258,6 +257,10 @@ export default {
       return this.$store.state.profile;
     },
     orgApiData() {
+      console.log("orgApiData",this.$store.state.orgApiData )
+      let data = this.$store.state.orgApiData
+      this.address = data.address + ", " + data.city + ", " + data.state + " " + data.zipcode
+      console.log(this.address)
       return this.$store.state.orgApiData;
     }
   },
