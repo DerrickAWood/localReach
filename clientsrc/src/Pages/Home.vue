@@ -139,6 +139,7 @@ export default {
         touchsurface.addEventListener(
           "touchstart",
           function(e) {
+            console.log("touchstart");
             // touchsurface.innerHTML = "";
             var touchobj = e.changedTouches[0];
             dist = 0;
