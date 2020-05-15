@@ -42,16 +42,16 @@
         <h3 class="card-title">{{orgData.name}}</h3>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <span v-touch:swipe.left="swipeHandlerLeft">
-        <span v-touch:swipe.right="swipeHandlerRight">
+    <span v-touch:swipe.left="swipeHandlerLeft">
+      <span v-touch:swipe.right="swipeHandlerRight">
+        <div class="row justify-content-center">
           <div class="col-md-6 bg-dark text-white">
             <img :src="orgData.picture" class="card-img img-fluid" alt />
             <div class="card-img-overlay text-center text-dark"></div>
           </div>
-        </span>
+        </div>
       </span>
-    </div>
+    </span>
 
     <OrgDonation :orgData="orgData" v-if="orgData"></OrgDonation>
     <hr />
