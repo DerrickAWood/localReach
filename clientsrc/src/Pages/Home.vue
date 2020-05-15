@@ -42,11 +42,12 @@
         <h3 class="card-title">{{orgData.name}}</h3>
       </div>
     </div>
-
-    <div class="card bg-dark text-white">
+  <div class="row justify-content-center">
+    <div class="col-md-6 bg-dark text-white">
       <img :src="orgData.picture" class="card-img img-fluid" id="swipe" alt />
       <div class="card-img-overlay text-center text-dark"></div>
     </div>
+  </div>
 
     <OrgDonation :orgData="orgData" v-if="orgData"></OrgDonation>
     <hr />
