@@ -11,7 +11,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">Donate</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button id="exit-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -107,6 +107,8 @@ export default {
             return data2;
           },
           onApprove: async (data, actions) => {
+            let exitButton = document.getElementById("exit-button")
+            exitButton.click()
             let data3 = await actions.order.capture()
             this.donate(this.profile.amount);
             return data3
