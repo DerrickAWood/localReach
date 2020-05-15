@@ -11,6 +11,7 @@ const Profile = new Schema(
     location: {type: String},
     payment: {type: String},
     default: {type: Number, default: 5},
+    amount: {type: Number, default: 0},
     banned: {type: Boolean, default: false}
   },
   { timestamps: true, toJSON: { virtuals: true } }

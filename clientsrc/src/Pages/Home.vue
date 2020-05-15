@@ -116,7 +116,8 @@ export default {
       let currentOrg = 0;
       currentOrg = this.currentIndex;
       currentOrg += num;
-
+      this.profile.amount = 0
+      
       //console.log( "next%",  currentOrg % (this.filteredList.length) )
 
       if (currentOrg == this.filteredList.length) {

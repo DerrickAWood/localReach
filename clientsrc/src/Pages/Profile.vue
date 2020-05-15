@@ -11,7 +11,7 @@
             <li class="list-group-item bg-transparent">email: {{ profile.email }}</li>
             <li class="list-group-item bg-transparent">Location: {{ profile.location }}</li>
             <li class="list-group-item bg-transparent">Payment Info: {{ profile.payment }}</li>
-            <li class="list-group-item bg-transparent">Default Payment Amount: {{ profile.default }}</li>
+            <!-- <li class="list-group-item bg-transparent">Default Payment Amount: {{ profile.default }}</li> -->
           </ul>
           <div class="card-body">
             <button
@@ -91,15 +91,15 @@
                 v-model="profile.picture"
                 required
               />
-              <h5 class="m-1 pr-2 pl-3 tskName">Default Donation Amount:</h5>
+              <!-- <h5 class="m-1 pr-2 pl-3 tskName">Default Donation Amount:</h5>
               <input
                 class="pr-4 pl-2 inputTask"
                 type="text"
                 placeholder="add default amount..."
                 v-model="profile.default"
                 required
-              />
-            </form>...
+              /> -->
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

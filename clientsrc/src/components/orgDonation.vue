@@ -20,8 +20,8 @@
               <input
                 class="pr-4 pl-2 inputTask m-3"
                 type="text"
-                placeholder="add default amount..."
-                v-model="profile.default"
+                placeholder="amount..."
+                 v-model="profile.amount"
                 required
               />
               <div ref="paypal"></div>
@@ -52,7 +52,7 @@ export default {
       return this.$store.state.profile;
     }
   },
-  beforeUpdate() {
+  mounted() {
     console.log("beforeUpdate", this.orgData);
     const script = document.createElement("script");
     if (this.orgData.clientId) {
@@ -99,14 +99,17 @@ export default {
                   description: "this is a donation",
                   amount: {
                     currency_code: "USD",
-                    value: this.profile.default
+                    value: this.profile.amount
                   }
                 }
               ]
             });
-            this.donate(this.profile.default);
-            console.log("setLoaded", data2);
             return data2;
+          },
+          onApprove: async (data, actions) => {
+            let data3 = await actions.order.capture()
+            this.donate(this.profile.amount);
+            return data3
           }
         })
         .render(this.$refs.paypal);
