@@ -42,12 +42,16 @@
         <h3 class="card-title">{{orgData.name}}</h3>
       </div>
     </div>
-  <div class="row justify-content-center">
-    <div class="col-md-6 bg-dark text-white">
-      <img :src="orgData.picture" class="card-img img-fluid" id="swipe" alt />
-      <div class="card-img-overlay text-center text-dark"></div>
+    <div class="row justify-content-center">
+      <span v-touch:swipe.left="swipeHandlerLeft">
+        <span v-touch:swipe.right="swipeHandlerRight">
+          <div class="col-md-6 bg-dark text-white">
+            <img :src="orgData.picture" class="card-img img-fluid" alt />
+            <div class="card-img-overlay text-center text-dark"></div>
+          </div>
+        </span>
+      </span>
     </div>
-  </div>
 
     <OrgDonation :orgData="orgData" v-if="orgData"></OrgDonation>
     <hr />
@@ -65,11 +69,7 @@ export default {
     return {
       search: "",
       searchLocations: "",
-      loaded: false,
-      container: document.getElementById("swipe"),
-      initialX: null,
-      initialY: null
-      //product: { price: 5, description: "You made a donation" }
+      loaded: false
     };
   },
   computed: {
@@ -109,76 +109,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getOrgs");
-    console.log("mounted", document.getElementById("swipe"));
-    // console.log("mounted", this.container);
-    //let container = document.getElementById("swipe");
-    //this.container.addEventListener("touchstart", startTouch, false);
-    // container.addEventListener("touchmove", moveTouch, false);
-    window.addEventListener(
-      "load",
-      function() {
-        var touchsurface = document.getElementById("swipe"),
-          startX,
-          startY,
-          dist,
-          threshold = 150, //required min distance traveled to be considered swipe
-          allowedTime = 200, // maximum time allowed to travel that distance
-          elapsedTime,
-          startTime;
-
-        function handleswipe(isrightswipe) {
-          if (isrightswipe)
-            // touchsurface.innerHTML =
-            // 'Congrats, you\'ve made a <span style="color:red">right swipe!</span>';
-            console.log("right");
-          else {
-            console.log("else");
-            //touchsurface.innerHTML = "Condition for right swipe not met yet";
-          }
-        }
-
-        touchsurface.addEventListener(
-          "touchstart",
-          function(e) {
-            console.log("touchstart");
-            // touchsurface.innerHTML = "";
-            var touchobj = e.changedTouches[0];
-            dist = 0;
-            startX = touchobj.pageX;
-            startY = touchobj.pageY;
-            startTime = new Date().getTime(); // record time when finger first makes contact with surface
-            e.preventDefault();
-          },
-          false
-        );
-
-        touchsurface.addEventListener(
-          "touchmove",
-          function(e) {
-            e.preventDefault(); // prevent scrolling when inside DIV
-          },
-          false
-        );
-
-        touchsurface.addEventListener(
-          "touchend",
-          function(e) {
-            var touchobj = e.changedTouches[0];
-            dist = touchobj.pageX - startX; // get total dist traveled by finger while in contact with surface
-            elapsedTime = new Date().getTime() - startTime; // get time elapsed
-            // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
-            var swiperightBol =
-              elapsedTime <= allowedTime &&
-              dist >= threshold &&
-              Math.abs(touchobj.pageY - startY) <= 100;
-            handleswipe(swiperightBol);
-            e.preventDefault();
-          },
-          false
-        );
-      },
-      false
-    ); // end window.onload
   },
   methods: {
     next(num) {
@@ -199,10 +129,12 @@ export default {
       this.$store.dispatch("next", currentOrg);
     },
 
-    startTouch(e) {
-      console.log("startTouch");
-      initialX = e.touches[0].clientX;
-      initialY = e.touches[0].clientY;
+    swipeHandlerLeft() {
+      this.next(1);
+    },
+
+    swipeHandlerRight() {
+      this.next(-1);
     },
 
     async searchOrgs() {
