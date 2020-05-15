@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <button @click="checkPaypal">Clickme</button>
+      <!-- <button @click="checkPaypal">Clickme</button> -->
     </div>
   </div>
 </template>
@@ -82,9 +82,9 @@ export default {
       }
     },
 
-    checkPaypal() {
-      console.log(window.paypal);
-    },
+    // checkPaypal() {
+    //   console.log(window.paypal);
+    // },
 
     //ANCHOR try to access paypal pay now button in window
     setLoaded: function(loaded) {
